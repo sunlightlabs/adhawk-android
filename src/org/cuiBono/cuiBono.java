@@ -17,6 +17,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.io.BufferedReader;
+import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class cuiBono extends Activity {
 
@@ -24,7 +33,6 @@ public class cuiBono extends Activity {
 	Button b;
 	
 	private OnClickListener record = new OnClickListener() {
-		@Override
 		public void onClick(View v) {
 			isRecording = !isRecording;
 			if (isRecording) {
@@ -106,6 +114,33 @@ public class cuiBono extends Activity {
 			Log.e("AudioRecord", "Recording Failed:" + t.getMessage());
 
 		}
+	}
+	public ArrayList<Object> getAdArticles(String id) {
+		ArrayList<Object> results = new ArrayList<Object>();
+		try {
+            URL webservice = new URL(
+                    "http://127.0.0.1:8080/api/ad/" + id);
+            URLConnection tc = webservice.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    tc.getInputStream()));
+ 
+            String line;
+            while ((line = in.readLine()) != null) {
+                JSONArray ja = new JSONArray(line);
+ 
+                for (int i = 0; i < ja.length(); i++) {
+                    JSONObject jo = (JSONObject) ja.get(i);
+                    results.add(jo.getJSONObject("articles"));
+                }
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+		return results;
 	}
 
 }
