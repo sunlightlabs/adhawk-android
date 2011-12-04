@@ -123,11 +123,11 @@ public class cuiBono extends Activity {
             URLConnection tc = webservice.openConnection();
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     tc.getInputStream()));
- 
+
             String line;
             while ((line = in.readLine()) != null) {
                 JSONArray ja = new JSONArray(line);
- 
+
                 for (int i = 0; i < ja.length(); i++) {
                     JSONObject jo = (JSONObject) ja.get(i);
                     results.add(jo.getJSONObject("articles"));
