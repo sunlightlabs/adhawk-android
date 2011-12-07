@@ -14,11 +14,16 @@
 #
 LOCAL_PATH := $(call my-dir)
 
-
 include $(CLEAR_VARS)
 
+LOCAL_CFLAGS += -I$(LOCAL_PATH)/boost/include/
+LOCAL_CPPFLAGS += -fexceptions
+LOCAL_CPPFLAGS += -frtti
+
+LOCAL_LDLIBS += -L/home/ludflu/projects/cuibono_android/jni/external/boost/lib
+LOCAL_LDLIBS += -L$(LOCAL_PATH)/external/boost/lib/ -lboost_system 
 LOCAL_MODULE    := echonest-codegen
-LOCAL_SRC_FILES := AudioBufferInput.cpp Base64.cpp Fingerprint.cpp MatrixUtility.cpp SubbandAnalysis.cpp Codegen.cpp main.cpp Metadata.cpp Whitening.cpp
+LOCAL_SRC_FILES := AudioBufferInput.cpp Base64.cpp Fingerprint.cpp MatrixUtility.cpp SubbandAnalysis.cpp Codegen.cpp  Whitening.cpp AudioStreamInput.cpp 
 
 
 include $(BUILD_SHARED_LIBRARY)

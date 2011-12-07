@@ -28,11 +28,11 @@ public:
 
 protected:
     const float* _pSamples;
+    float* _r;
     float* _whitened;
-    uint _NumSamples;
-    float* _R;
     float *_Xo;
     float *_ai;
+    uint _NumSamples;
     int _p;
 private:
     void Init();

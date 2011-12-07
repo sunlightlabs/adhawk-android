@@ -1,2 +1,6 @@
-APP_STL := stlport_static
+#APP_STL := stlport_static
+APP_STL := gnustl_static
+LOCAL_CFLAGS += -DBOOST_EXCEPTION_DISABLE -D_STLP_NO_EXCEPTIONS -DOS_ANDROID -D_STLP_USE_SIMPLE_NODE_ALLOC
+LOCAL_C_INCLUDES +=  -I/usr/include
+LOCAL_CPP_INCLUDES +=  -I/usr/include
 

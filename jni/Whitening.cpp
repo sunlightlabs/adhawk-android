@@ -19,7 +19,7 @@ Whitening::Whitening(const float* pSamples, uint numSamples) :
 }
 
 Whitening::~Whitening() {
-    free(_R);
+    free(_r);
     free(_Xo);
     free(_ai);
     free(_whitened);
@@ -29,9 +29,9 @@ void Whitening::Init() {
     int i;
     _p = 40;
 
-    _R = (float *)malloc((_p+1)*sizeof(float));
-    for (i = 0; i <= _p; ++i)  { _R[i] = 0.0; }
-    _R[0] = 0.001;
+    _r = (float *)malloc((_p+1)*sizeof(float));
+    for (i = 0; i <= _p; ++i)  { _r[i] = 0.0; }
+    _r[0] = 0.001;
 
     _Xo = (float *)malloc((_p+1)*sizeof(float));
     for (i = 0; i < _p; ++i)  { _Xo[i] = 0.0; }
@@ -67,18 +67,18 @@ void Whitening::ComputeBlock(int start, int blockSize) {
             }
         }
         // smoothed update
-        _R[i] += alpha*(acc - _R[i]);
+        _r[i] += alpha*(acc - _r[i]);
     }
 
     // calculate new filter coefficients
     // Durbin's recursion, per p. 411 of Rabiner & Schafer 1978
-    E = _R[0];
+    E = _r[0];
     for (i = 1; i <= _p; ++i) {
         float sumalphaR = 0;
         for (j = 1; j < i; ++j) {
-            sumalphaR += _ai[j]*_R[i-j];
+            sumalphaR += _ai[j]*_r[i-j];
         }
-        ki = (_R[i] - sumalphaR)/E;
+        ki = (_r[i] - sumalphaR)/E;
         _ai[i] = ki;
         for (j = 1; j <= i/2; ++j) {
             float aj = _ai[j];

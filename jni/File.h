@@ -4,6 +4,10 @@
 //
 
 
+#include <stdio.h>
+#include <ctype.h>
+#include <unistd.h>
+
 #ifndef FILE_H
 #define FILE_H
 #include <string.h>
@@ -22,7 +26,6 @@ bool WriteStuffToFile(const char* filename)
 }
 */
 
-const int F_OK = 0;
 
 class File {
 public:
