@@ -21,7 +21,7 @@ LOCAL_CPPFLAGS += -fexceptions
 LOCAL_CPPFLAGS += -frtti
 
 LOCAL_LDLIBS += -L/home/ludflu/projects/cuibono_android/jni/external/boost/lib
-LOCAL_LDLIBS += -L$(LOCAL_PATH)/external/boost/lib/ -lboost_system 
+LOCAL_LDLIBS += -L$(LOCAL_PATH)/external/boost/lib/ -lboost_system  -lz
 LOCAL_MODULE    := echonest-codegen
 LOCAL_SRC_FILES := AudioBufferInput.cpp Base64.cpp Fingerprint.cpp MatrixUtility.cpp SubbandAnalysis.cpp Codegen.cpp  Whitening.cpp AudioStreamInput.cpp 
 
