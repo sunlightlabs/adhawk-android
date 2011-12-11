@@ -1,99 +1,96 @@
 package org.cuiBono;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.io.BufferedReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class CuiBono extends Activity {
 
+	static {
+        System.loadLibrary("echonest-codegen");
+      }
+
 	boolean isRecording = false;
-	Button b;
+	Button recordButton;
 		
-    static {
-      System.loadLibrary("echonest-codegen");
-    }
     
     private native String getCodeGen(String fname);
-
 	
-	private OnClickListener record = new OnClickListener() {
-		public void onClick(View v) {
-			isRecording = !isRecording;
-			if (isRecording) {
-				b.setText("Stop Recording");
-				
-				 new CountDownTimer(10000, 1000) {
-
-				     public void onFinish() {
-				    	 isRecording = false;
-				     }
-
-					@Override
-					public void onTick(long arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-				  }.start();
-
-				Thread t = new Thread() {
-					@Override
-					public void run() {
-												  
-						record();
-						String code = getCodeGen("fname");
-//						b.setText("Start Recording");
-
-						//List<Object> bla = getAdArticles(code); 
-					//	b.setText("Start Recording");
-						Intent adinfo = new Intent( CuiBono.this, AdInfo.class );
-						startActivity(adinfo);
-			
-					}
-				};
-				t.start();
-			}
+    
+    
+	private class TagAdTask extends AsyncTask<String, Void, String> {
+		@Override
+		protected String doInBackground(String... urls) {
+			String response = "";
+			record();
+			String code = getCodeGen("fname");
+			//List<Object> bla = getAdArticles(code); 
+			return response;
 		}
-		
+
+		@Override
+		protected void onPostExecute(String result) {
+			recordButton.setText("Start Recording");
+			Intent adinfo = new Intent( CuiBono.this, AdInfo.class );
+			startActivity(adinfo);
+
+		}
+	}
+
+    
+    
+	private OnClickListener record = new OnClickListener() {
+		public void onClick(View v) {		
+			if (isRecording ) return;
+			isRecording = true;
+			TagAdTask task = new TagAdTask();
+			task.execute(new String[] { "http://blaaa.bla" });
+		}
 	};
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		b =(Button) findViewById(R.id.RecordButton);
-		b.setOnClickListener(record);
+		recordButton =(Button) findViewById(R.id.RecordButton);
+		recordButton.setOnClickListener(record);
 	}
 
 	public void record() {
+	
+// please note: the emulator only supports 8 khz sampling.
+// so in test mode, you need to change this
+//		int frequency = 8000;
+		
 		int frequency = 11025;
+
 		int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
 		int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
 		File file = new File(Environment.getExternalStorageDirectory()
@@ -130,7 +127,9 @@ public class CuiBono extends Activity {
 
 			Log.e("AudioRecord", "Recording started");
 
-			while (isRecording) {
+			long start = SystemClock.elapsedRealtime ();
+			long end = start + 10000;
+			while (SystemClock.elapsedRealtime () < end) {
 				int bufferReadResult = audioRecord.read(buffer, 0, bufferSize);
 				for (int i = 0; i < bufferReadResult; i++)
 					dos.writeShort(buffer[i]);
@@ -142,8 +141,8 @@ public class CuiBono extends Activity {
 			bos.flush();
 			dos.close();
 
-		} catch (Throwable t) {
-			Log.e("AudioRecord", "Recording Failed:" + t.getMessage());
+		} catch (Exception e) {
+			Log.e("AudioRecord", "Recording Failed:" + e.getMessage() );
 
 		}
 	}
