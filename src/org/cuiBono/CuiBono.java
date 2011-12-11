@@ -1,19 +1,19 @@
 package org.cuiBono;
 
 import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
+import java.io.StringWriter;
 
-import org.json.JSONArray;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,62 +33,74 @@ import android.widget.Button;
 
 public class CuiBono extends Activity {
 
+	static String tag = "CuiBono";
+	
+	String url = "http://127.0.0.1:8080/api/ad/";
+
 	static {
-        System.loadLibrary("echonest-codegen");
-      }
+		System.loadLibrary("echonest-codegen");
+	}
 
 	boolean isRecording = false;
 	Button recordButton;
-		
-    
-    private native String getCodeGen(String fname);
-	
-    
-    
+
+	private native String getCodeGen(String fname);
+
 	private class TagAdTask extends AsyncTask<String, Void, String> {
+
+		JSONObject response;
 		@Override
 		protected String doInBackground(String... urls) {
-			String response = "";
 			record();
 			String code = getCodeGen("fname");
-			//List<Object> bla = getAdArticles(code); 
-			return response;
+			response = getAdArticles(code);
+			return "ok";
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
 			recordButton.setText("Start Recording");
-			Intent adinfo = new Intent( CuiBono.this, AdInfo.class );
-			startActivity(adinfo);
+			Intent adinfo = new Intent(CuiBono.this, AdInfo.class);
+			Bundle extras = adinfo.getExtras();
+			try {
 
+				extras.putString("title",  response.getString("title"));
+				extras.putString("funder", response.getString("funder"));
+				extras.putString("url",  response.getString("url"));
+				adinfo.putExtras(extras);
+				startActivity(adinfo);
+
+			} catch (JSONException e) {
+				Log.e(tag, "JSON problem:" + e.getMessage());
+				throw new CuiBonoException("JSON problem",e);
+			}
 		}
 	}
 
-    
-    
 	private OnClickListener record = new OnClickListener() {
-		public void onClick(View v) {		
-			if (isRecording ) return;
+		public void onClick(View v) {
+			if (isRecording)
+				return;
 			isRecording = true;
 			TagAdTask task = new TagAdTask();
 			task.execute(new String[] { "http://blaaa.bla" });
 		}
 	};
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		recordButton =(Button) findViewById(R.id.RecordButton);
+		recordButton = (Button) findViewById(R.id.RecordButton);
 		recordButton.setOnClickListener(record);
 	}
 
 	public void record() {
-	
-// please note: the emulator only supports 8 khz sampling.
-// so in test mode, you need to change this
-//		int frequency = 8000;
-		
+
+		// please note: the emulator only supports 8 khz sampling.
+		// so in test mode, you need to change this to
+		// int frequency = 8000;
+
 		int frequency = 11025;
 
 		int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
@@ -125,55 +137,51 @@ public class CuiBono extends Activity {
 			short[] buffer = new short[bufferSize];
 			audioRecord.startRecording();
 
-			Log.e("AudioRecord", "Recording started");
+			Log.e(tag, "Recording started");
 
-			long start = SystemClock.elapsedRealtime ();
+			long start = SystemClock.elapsedRealtime();
 			long end = start + 10000;
-			while (SystemClock.elapsedRealtime () < end) {
+			while (SystemClock.elapsedRealtime() < end) {
 				int bufferReadResult = audioRecord.read(buffer, 0, bufferSize);
 				for (int i = 0; i < bufferReadResult; i++)
 					dos.writeShort(buffer[i]);
 			}
 
-			Log.e("AudioRecord", "Recording stopped");
+			Log.e(tag, "Recording stopped");
 
 			audioRecord.stop();
 			bos.flush();
 			dos.close();
 
 		} catch (Exception e) {
-			Log.e("AudioRecord", "Recording Failed:" + e.getMessage() );
+			Log.e(tag, "Recording Failed:" + e.getMessage());
 
 		}
 	}
-	
-	
-	public ArrayList<Object> getAdArticles(String id) {
-		ArrayList<Object> results = new ArrayList<Object>();
+
+	public JSONObject getAdArticles(String id) {
+
+		DefaultHttpClient client = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(url + id);
+
 		try {
-            URL webservice = new URL(
-                    "http://127.0.0.1:8080/api/ad/" + id);
-            URLConnection tc = webservice.openConnection();
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    tc.getInputStream()));
+			HttpResponse response = client.execute(httpGet);
+			InputStream content = response.getEntity().getContent();		
+			StringWriter writer = new StringWriter();
+			IOUtils.copy(content, writer, "utf-8");
+			return new JSONObject (writer.toString()); 
+			
+		} catch (ClientProtocolException e) {
+			Log.e(tag, "client problem:" + e.getMessage());
+			throw new CuiBonoException("client problem",e);
+		} catch (IOException e) {
+			Log.e(tag, "IO problem:" + e.getMessage());
+			throw new CuiBonoException("IO problem",e);
+		} catch (JSONException e) {
+			Log.e(tag, "JSON problem:" + e.getMessage());
+			throw new CuiBonoException("JSON problem",e);
+		}
 
-            String line;
-            while ((line = in.readLine()) != null) {
-                JSONArray ja = new JSONArray(line);
-
-                for (int i = 0; i < ja.length(); i++) {
-                    JSONObject jo = (JSONObject) ja.get(i);
-                    results.add(jo.getJSONObject("articles"));
-                }
-            }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-		return results;
 	}
 
 }
