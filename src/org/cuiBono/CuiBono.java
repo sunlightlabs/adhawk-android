@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
+import java.lang.Thread.UncaughtExceptionHandler;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -18,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -30,12 +32,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class CuiBono extends Activity {
+public class CuiBono extends Activity implements UncaughtExceptionHandler{
 
 	static String tag = "CuiBono";
 	
-	String url = "http://127.0.0.1:8080/api/ad/";
+	static String url = "http://localhost:8000/api/ad/";
+	
+	
 
 	static {
 		System.loadLibrary("echonest-codegen");
@@ -53,7 +58,7 @@ public class CuiBono extends Activity {
 		protected String doInBackground(String... urls) {
 			record();
 			String code = getCodeGen("fname");
-			response = getAdArticles(code);
+			response = getAdArticles("1");
 			return "ok";
 		}
 
@@ -93,15 +98,17 @@ public class CuiBono extends Activity {
 		setContentView(R.layout.main);
 		recordButton = (Button) findViewById(R.id.RecordButton);
 		recordButton.setOnClickListener(record);
+		
+		Thread.setDefaultUncaughtExceptionHandler(this);
 	}
 
 	public void record() {
 
 		// please note: the emulator only supports 8 khz sampling.
 		// so in test mode, you need to change this to
-		// int frequency = 8000;
+		int frequency = 8000;
 
-		int frequency = 11025;
+		//int frequency = 11025;
 
 		int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
 		int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
@@ -181,7 +188,15 @@ public class CuiBono extends Activity {
 			Log.e(tag, "JSON problem:" + e.getMessage());
 			throw new CuiBonoException("JSON problem",e);
 		}
+	}
 
+	public void uncaughtException(Thread thread, Throwable exception) {
+		Context context = getApplicationContext();
+		CharSequence text = "Problem connecting to CuiBono website.";
+		int duration = Toast.LENGTH_SHORT;
+
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();		
 	}
 
 }
