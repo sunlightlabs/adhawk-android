@@ -13,6 +13,10 @@
 
 #include <jni.h>
 #include <string.h>
+
+
+extern "C" {
+
 // The response from the codegen. Contains all the fields necessary
 // to create a json string.
 typedef struct {
@@ -106,10 +110,10 @@ codegen_response_t *codegen_file(char* filename ) {
 
 
 JNIEXPORT jstring Java_org_cuiBono_CuiBono_getCodeGen(JNIEnv* env, jobject javaThis) {
- codegen_response_t* response = codegen_file( "reverseme.pcm" );
+ codegen_response_t* response = codegen_file( "/mnt/sdcard/reverseme.pcm" );
   return env->NewStringUTF(response->codegen->getCodeString().c_str()  );
   //return env->NewStringUTF("Hello from native code!");
 }
 
-
+}
 
