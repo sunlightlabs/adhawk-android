@@ -11,6 +11,14 @@
     />
 
 <Button android:text="@string/adinfo_btn_lbl" android:id="@+id/adinfo1" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+
+    <TextView  
+    android:id="@+id/ad_transcript_view"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+   android:text="@string/ad_transcript"
+ 
+    />
     
 
 </LinearLayout>

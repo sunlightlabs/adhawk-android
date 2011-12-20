@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class AdInfo extends Activity{
 
@@ -26,5 +27,10 @@ public class AdInfo extends Activity{
 		setContentView(R.layout.adinfo);
 		b =(Button) findViewById(R.id.adinfo1);
 		b.setOnClickListener(getCoverage);
+		Bundle bundle = getIntent().getExtras();
+		
+		TextView trans = (TextView) findViewById(R.id.ad_transcript_view);
+		trans.setText( bundle.getString("transcript") );
+		
 	}
 }

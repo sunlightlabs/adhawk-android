@@ -5,4 +5,5 @@
 <string name="record">Start Recording</string>
 <string name="ad_title">Info about this ad</string>
 <string name="adinfo_btn_lbl">find journalistic coverage</string>
+<string name="ad_transcript">test transcript</string>
 </resources>

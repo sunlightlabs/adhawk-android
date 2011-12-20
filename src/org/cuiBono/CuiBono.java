@@ -70,6 +70,8 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 				extras.putString("title",  response.getString("title"));
 				extras.putString("funder", response.getString("funder"));
 				extras.putString("url",  response.getString("url"));
+				extras.putString("transcript",  response.getString("transcript"));
+						
 				adinfo.putExtras(extras);
 				startActivity(adinfo);
 
@@ -104,9 +106,9 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 
 		// please note: the emulator only supports 8 khz sampling.
 		// so in test mode, you need to change this to
-		int frequency = 8000;
+		//int frequency = 8000;
 
-		//int frequency = 11025;
+		int frequency = 11025;
 
 		int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
 		int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
