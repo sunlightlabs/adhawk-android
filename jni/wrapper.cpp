@@ -21,7 +21,7 @@ extern "C" {
 // to create a json string.
 typedef struct {
     char *error;
-    char *filename;
+    const char *filename;
     int start_offset;
     int duration;
     int tag;
@@ -61,7 +61,7 @@ std::string escape(const string& value) {
 }
 
 
-codegen_response_t *codegen_file(char* filename ) {
+codegen_response_t *codegen_file(const char* filename ) {
     // Given a filename, perform a codegen on it and get the response
     // This is called by a thread
     double t1 = now();
@@ -109,8 +109,12 @@ codegen_response_t *codegen_file(char* filename ) {
 }
 
 
-JNIEXPORT jstring Java_org_cuiBono_CuiBono_getCodeGen(JNIEnv* env, jobject javaThis) {
- codegen_response_t* response = codegen_file( "/mnt/sdcard/reverseme.pcm" );
+JNIEXPORT jstring Java_org_cuiBono_CuiBono_getCodeGen(JNIEnv* env, jobject javaThis, jstring path) {
+
+  jboolean isCopy;  
+ const char * pathstr = env->GetStringUTFChars( path, &isCopy);  
+
+ codegen_response_t* response = codegen_file( pathstr );
   return env->NewStringUTF(response->codegen->getCodeString().c_str()  );
   //return env->NewStringUTF("Hello from native code!");
 }

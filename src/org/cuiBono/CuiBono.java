@@ -54,8 +54,12 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 		JSONObject response;
 		@Override
 		protected String doInBackground(String... urls) {
-			record();
-			String code = getCodeGen("fname");
+			String fname = record();
+			
+			Log.e(tag, "fname is " + fname);
+			String code = getCodeGen(fname);
+			Log.e(tag, "audio fingerprint is " + code);
+			
 			response = getAdArticles(code);
 			return "ok";
 		}
@@ -102,7 +106,7 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 		Thread.setDefaultUncaughtExceptionHandler(this);
 	}
 
-	public void record() {
+	public String record() {
 
 		// please note: the emulator only supports 8 khz sampling.
 		// so in test mode, you need to change this to
@@ -159,9 +163,11 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 			audioRecord.stop();
 			bos.flush();
 			dos.close();
+			return file.getAbsolutePath();
 
 		} catch (Exception e) {
 			Log.e(tag, "Recording Failed:" + e.getMessage());
+			throw new RuntimeException("Failed to create " + e.getMessage());
 
 		}
 	}
