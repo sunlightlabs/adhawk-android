@@ -38,10 +38,8 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 
 	static String tag = "CuiBono";
 	
-	static String url = "http://localhost:8000/api/ad/";
+	static String url = "http://kifunator.com/api/ad/";
 	
-	
-
 	static {
 		System.loadLibrary("echonest-codegen");
 	}
@@ -58,7 +56,7 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 		protected String doInBackground(String... urls) {
 			record();
 			String code = getCodeGen("fname");
-			response = getAdArticles("1");
+			response = getAdArticles(code);
 			return "ok";
 		}
 
