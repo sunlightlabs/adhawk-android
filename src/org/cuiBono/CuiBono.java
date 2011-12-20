@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioFormat;
@@ -44,28 +45,44 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 		System.loadLibrary("echonest-codegen");
 	}
 
-	boolean isRecording = false;
-	Button recordButton;
-
+	private boolean isRecording = false;
+	private Button recordButton;
+	private NotificationManager notificationManager;
+	
+	 
 	private native String getCodeGen(String fname);
 
-	private class TagAdTask extends AsyncTask<String, Void, String> {
+	private class TagAdTask extends AsyncTask<String, String, String> {
 
 		JSONObject response;
 		@Override
 		protected String doInBackground(String... urls) {
+
 			String fname = record();
 			
 			Log.e(tag, "fname is " + fname);
 			String code = getCodeGen(fname);
 			Log.e(tag, "audio fingerprint is " + code);
 			
-			response = getAdArticles(code);
+			try {
+				response = getAdArticles(code);				
+			} catch (Exception e) {
+				publishProgress("problem with webservice");
+				return "bad";
+			}
 			return "ok";
+		}
+				
+		protected void onProgressUpdate(String... problem) {
+			sendNotify(problem[0]);			
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
+			
+			if (result.equals("bad")) {
+				return;
+			}
 			recordButton.setText("Start Recording");
 			Intent adinfo = new Intent(CuiBono.this, AdInfo.class);
 			Bundle extras = adinfo.getExtras();
@@ -163,6 +180,7 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 			audioRecord.stop();
 			bos.flush();
 			dos.close();
+			isRecording = false;
 			return file.getAbsolutePath();
 
 		} catch (Exception e) {
@@ -197,12 +215,13 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 	}
 
 	public void uncaughtException(Thread thread, Throwable exception) {
-		Context context = getApplicationContext();
-		CharSequence text = "Problem connecting to CuiBono website.";
-		int duration = Toast.LENGTH_SHORT;
-
-		Toast toast = Toast.makeText(context, text, duration);
-		toast.show();		
+		Log.e(tag, "uncaught exception:" + exception.getMessage());
 	}
+
+	
+	 protected void sendNotify(String msg) {
+         Context context = getApplicationContext();
+         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();         
+ }
 
 }
