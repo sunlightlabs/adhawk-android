@@ -33,6 +33,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CuiBono extends Activity implements UncaughtExceptionHandler{
@@ -58,13 +59,20 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 		@Override
 		protected String doInBackground(String... urls) {
 
+			publishProgress("recording in progress!");
+			
 			String fname = record();
 			
 			Log.e(tag, "fname is " + fname);
+
+			publishProgress("generating fingerprint!");
+
 			String code = getCodeGen(fname);
 			Log.e(tag, "audio fingerprint is " + code);
 			
 			try {
+				publishProgress("calling webservice!");
+
 				response = getAdArticles(code);				
 			} catch (Exception e) {
 				publishProgress("problem with webservice");
@@ -74,7 +82,11 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 		}
 				
 		protected void onProgressUpdate(String... problem) {
-			sendNotify(problem[0]);			
+			
+			TextView text = (TextView) findViewById(R.id.status);
+			text.setText(problem[0]);			
+			sendNotify(problem[0]);		
+			
 		}
 
 		@Override
@@ -216,6 +228,7 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 
 	public void uncaughtException(Thread thread, Throwable exception) {
 		Log.e(tag, "uncaught exception:" + exception.getMessage());
+		sendNotify("problem:" + exception.getMessage());
 	}
 
 	
