@@ -97,7 +97,7 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 			}
 			recordButton.setText("Start Recording");
 			Intent adinfo = new Intent(CuiBono.this, AdInfo.class);
-			Bundle extras = adinfo.getExtras();
+			Bundle extras = new Bundle();
 			try {
 
 				extras.putString("title",  response.getString("title"));
