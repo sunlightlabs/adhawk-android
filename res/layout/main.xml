@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/FrameLayout1"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
-    android:id="@+id/status"
-    />
-<Button android:text="@string/record" android:id="@+id/RecordButton" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-</LinearLayout>
+    android:layout_height="fill_parent" >
+        
+    <RelativeLayout  android:layout_width="match_parent" android:layout_height="match_parent">
+    
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/president_crop" />
+    
+    <Button
+        android:id="@+id/RecordButton"
+        android:layout_width="234dp"
+        android:layout_height="152dp"
+        android:clickable="true"
+        android:gravity="center|center_vertical"
+        android:text="@string/record" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="101dp"
+        android:src="@drawable/money_trans" />
+    
+    </RelativeLayout>
+
+</FrameLayout>
