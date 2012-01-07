@@ -33,6 +33,7 @@
     android:background="@drawable/button"
     android:clickable="true"
     android:gravity="center|center_vertical"
+    android:textSize="30sp"
     android:text="@string/record" />
 
 <TextView
