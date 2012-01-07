@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.nio.ByteOrder;
 
+import org.apache.commons.io.EndianUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -72,7 +74,6 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 			
 			try {
 				publishProgress("calling webservice!");
-
 				response = getAdArticles(code);				
 			} catch (Exception e) {
 				publishProgress("problem with webservice");
@@ -184,7 +185,12 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 			while (SystemClock.elapsedRealtime() < end) {
 				int bufferReadResult = audioRecord.read(buffer, 0, bufferSize);
 				for (int i = 0; i < bufferReadResult; i++)
-					dos.writeShort(buffer[i]);
+					
+					if (ByteOrder.nativeOrder().equals(ByteOrder.LITTLE_ENDIAN)) {
+						dos.writeShort( EndianUtils.swapShort(buffer[i]));						
+					} else {
+						dos.writeShort( buffer[i] );								
+					}
 			}
 
 			Log.e(tag, "Recording stopped");
