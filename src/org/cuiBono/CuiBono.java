@@ -181,7 +181,7 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 			Log.e(tag, "Recording started");
 
 			long start = SystemClock.elapsedRealtime();
-			long end = start + 20000;
+			long end = start + 10000;
 			while (SystemClock.elapsedRealtime() < end) {
 				int bufferReadResult = audioRecord.read(buffer, 0, bufferSize);
 				for (int i = 0; i < bufferReadResult; i++)
