@@ -12,13 +12,15 @@ import android.widget.TextView;
 public class AdInfo extends Activity{
 
 	Button b;
+	String url;
+	String funder;
+	String title;
 
 	private OnClickListener getCoverage = new OnClickListener() {
 		public void onClick(View v) {
-			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://news.google.com"));
+			Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			startActivity(browserIntent);
 		}
-		
 	};
 
 	@Override
@@ -28,6 +30,8 @@ public class AdInfo extends Activity{
 		b =(Button) findViewById(R.id.adinfo1);
 		b.setOnClickListener(getCoverage);
 		Bundle bundle = getIntent().getExtras();
+		
+		url = bundle.getString("url");
 		
 		TextView trans = (TextView) findViewById(R.id.ad_transcript_view);
 		trans.setText( bundle.getString("transcript") );
