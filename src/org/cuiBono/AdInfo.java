@@ -35,6 +35,13 @@ public class AdInfo extends Activity{
 		
 		TextView trans = (TextView) findViewById(R.id.ad_transcript_view);
 		trans.setText( bundle.getString("transcript") );
+
+		TextView title = (TextView) findViewById(R.id.ad_title_view);
+		title.setText( bundle.getString("title") );
+
+		TextView funder = (TextView) findViewById(R.id.ad_funder_view);
+		funder.setText( bundle.getString("funder") );
+
 		
 	}
 }
