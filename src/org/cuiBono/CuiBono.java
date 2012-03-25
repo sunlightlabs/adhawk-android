@@ -42,7 +42,7 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 
 	static String tag = "CuiBono";
 	
-	static String url = "http://kifunator.com/api/ad/";
+	static String url = "http://whopaidapp.org/api/ad/";
 	
 	static {
 		System.loadLibrary("echonest-codegen");
