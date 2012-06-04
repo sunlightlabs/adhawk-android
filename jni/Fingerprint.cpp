@@ -235,7 +235,7 @@ void Fingerprint::Compute() {
     for(uint i=0;i<5;i++) hash_material[i] = 0;
     uint * onset_counter_for_band;
     matrix_u out;
-    uint onset_count = adaptiveOnsets(345, out, onset_counter_for_band);
+    uint onset_count = adaptiveOnsets(115, out, onset_counter_for_band);
     _Codes.resize(onset_count*6);
 
     for(unsigned char band=0;band<SUBBANDS;band++) {
