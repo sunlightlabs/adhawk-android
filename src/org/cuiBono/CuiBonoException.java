@@ -1,7 +1,8 @@
 package org.cuiBono;
 
 public class CuiBonoException extends RuntimeException{
-	
+	private static final long serialVersionUID = 5L;
+
 	public CuiBonoException (String msg) {
 		super(msg);
 	}
