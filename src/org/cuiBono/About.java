@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
-public class About extends Activity implements ActionBarUtils.HasActionMenu {
+public class About extends Activity {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -24,27 +24,5 @@ public class About extends Activity implements ActionBarUtils.HasActionMenu {
 		
 		WebView content = (WebView) findViewById(R.id.content);
 		content.loadUrl(getResources().getString(R.string.site_about));
-	}
-	
-	@Override 
-	public boolean onCreateOptionsMenu(Menu menu) { 
-		super.onCreateOptionsMenu(menu); 
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		menuSelected(item);
-		return true;
-	}
-	
-	@Override
-	public void menuSelected(MenuItem item) {
-		switch(item.getItemId()) { 
-		case R.id.settings:
-			startActivity(new Intent(this, Settings.class));
-			break;
-		}
 	}
 }

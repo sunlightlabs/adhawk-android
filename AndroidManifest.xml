@@ -35,6 +35,11 @@
             
         </activity>
         
+        <activity android:name=".AdDetails"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation"
+			/>
+        
         <activity android:name=".Settings"
             android:screenOrientation="portrait" 
             android:configChanges="keyboardHidden|orientation"

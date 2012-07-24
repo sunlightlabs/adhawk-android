@@ -17,12 +17,6 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        >
-		    <Button android:id="@+id/start"
-		        android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_weight="0"
-				android:text="Hit Server"
-		        />
 		    <TextView android:id="@+id/error"
 		        android:layout_weight="1"
 		        android:layout_width="0dp" 
@@ -37,12 +31,22 @@
 			android:textSize="12sp"
 	        />
 	    
-		<WebView android:id="@+id/results"
+		<FrameLayout android:id="@+id/content"
 		    android:layout_weight="1"
 		    android:layout_width="match_parent"
 		    android:layout_height="0dp"
-		    android:background="#000000"
-		    />
+		    >
+		    
+		    <Button android:id="@+id/start"
+		        android:layout_width="250dp"
+				android:layout_height="100dp"
+				android:layout_gravity="center"
+				
+				android:textSize="24dp"
+				android:text="@string/listen"
+		        />
+		    
+		</FrameLayout>
 	    
 	</LinearLayout>
 </ScrollView>

@@ -9,4 +9,6 @@
     <string name="location_enabled">Send my anonymous location</string>
     <string name="location_enabled_summary">We use location to better understand political media markets.</string>
     
+    <string name="listen">Listen</string>
+    
 </resources>
