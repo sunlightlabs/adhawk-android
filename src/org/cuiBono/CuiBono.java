@@ -111,7 +111,7 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 
 			} catch (JSONException e) {
 				Log.e(tag, "JSON problem:" + e.getMessage());
-				throw new CuiBonoException("JSON problem",e);
+				throw new AdHawkException("JSON problem",e);
 			}
 		}
 	}
@@ -222,13 +222,13 @@ public class CuiBono extends Activity implements UncaughtExceptionHandler{
 			
 		} catch (ClientProtocolException e) {
 			Log.e(tag, "client problem:" + e.getMessage());
-			throw new CuiBonoException("client problem",e);
+			throw new AdHawkException("client problem",e);
 		} catch (IOException e) {
 			Log.e(tag, "IO problem:" + e.getMessage());
-			throw new CuiBonoException("IO problem",e);
+			throw new AdHawkException("IO problem",e);
 		} catch (JSONException e) {
 			Log.e(tag, "JSON problem:" + e.getMessage());
-			throw new CuiBonoException("JSON problem",e);
+			throw new AdHawkException("JSON problem",e);
 		}
 	}
 
