@@ -16,8 +16,15 @@ public class Settings extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_titled);
 		
-		ActionBarUtils.setTitle(this, R.string.menu_settings);
-		
+		setupControls();
+		setupPreferences();
+	}
+	
+	public void setupControls() {
+		ActionBarUtils.setTitle(this, R.string.app_name);
+	}
+	
+	public void setupPreferences() {
 		addPreferencesFromResource(R.xml.settings);
 		PreferenceManager.setDefaultValues(this, R.xml.settings, false);
 	}

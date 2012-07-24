@@ -64,6 +64,12 @@ public class CuiBono extends Activity implements ActionBarUtils.HasActionMenu {
 			}
 		});
 		
+		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.about, new View.OnClickListener() {
+			public void onClick(View v) { 
+				startActivity(new Intent(CuiBono.this, About.class));
+			}
+		});
+		
 		this.findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				tagAd();

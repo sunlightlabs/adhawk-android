@@ -1,6 +1,5 @@
 package org.cuiBono;
 
-public class Utils {
 
-	
+public class Utils {
 }

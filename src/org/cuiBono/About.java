@@ -20,6 +20,8 @@ public class About extends Activity implements ActionBarUtils.HasActionMenu {
 	}
 	
 	public void setupControls() {
+		ActionBarUtils.setTitle(this, R.string.app_name);
+		
 		WebView content = (WebView) findViewById(R.id.content);
 		content.loadUrl(getResources().getString(R.string.site_about));
 	}
