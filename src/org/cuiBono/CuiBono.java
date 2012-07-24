@@ -45,12 +45,11 @@ public class CuiBono extends Activity implements ActionBarUtils.HasActionMenu {
 	 
 	private TagAdTask task;
 	private TextView error, progress;
-	private WebView results;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.test);
+		setContentView(R.layout.main);
 		
 		setupControls();
 	}
@@ -78,9 +77,6 @@ public class CuiBono extends Activity implements ActionBarUtils.HasActionMenu {
 		
 		error = (TextView) findViewById(R.id.error);
 		progress = (TextView) findViewById(R.id.progress);
-		
-		results = (WebView) findViewById(R.id.results);
-		results.setBackgroundColor(0);
 	}
 	
 	public void tagAd() {

@@ -5,7 +5,7 @@
 	android:orientation="horizontal"
 	android:gravity="center_vertical"
 	
-	android:background="@color/background_dark"
+	android:background="@color/background_title"
 	
 	android:id="@+id/bar"
 	>
