@@ -10,17 +10,37 @@
 		android:layout_height="match_parent"
 		>
 		
-	    <Button android:id="@+id/start"
-	        android:layout_width="wrap_content" 
-			android:layout_height="wrap_content"
-			android:text="Hit Server"
-	        />
+	    <LinearLayout android:orientation="horizontal"
+	        android:layout_weight="0"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        >
+		    <Button android:id="@+id/start"
+		        android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_weight="0"
+				android:text="Hit Server"
+		        />
+		    <TextView android:id="@+id/error"
+		        android:layout_weight="1"
+		        android:layout_width="0dp" 
+				android:layout_height="wrap_content"
+				/>
+	    </LinearLayout>
 	    
-	    <TextView android:id="@+id/response"
+	    <TextView android:id="@+id/progress"
+	        android:layout_weight="0"
 	        android:layout_width="match_parent" 
 			android:layout_height="wrap_content"
 			android:textSize="12sp"
 	        />
+	    
+		<WebView android:id="@+id/results"
+		    android:layout_weight="1"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:background="#000000"
+		    />
 	    
 	</LinearLayout>
 </ScrollView>
