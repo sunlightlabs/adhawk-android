@@ -35,7 +35,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class CuiBonoOld extends Activity implements UncaughtExceptionHandler{
@@ -84,10 +83,6 @@ public class CuiBonoOld extends Activity implements UncaughtExceptionHandler{
 				
 		protected void onProgressUpdate(String... problem) {
 			
-			TextView text = (TextView) findViewById(R.id.status);
-			text.setText(problem[0]);			
-			sendNotify(problem[0]);		
-			
 		}
 
 		@Override
@@ -97,7 +92,7 @@ public class CuiBonoOld extends Activity implements UncaughtExceptionHandler{
 				return;
 			}
 			recordButton.setText("Start Recording");
-			Intent adinfo = new Intent(CuiBonoOld.this, AdInfo.class);
+			Intent adinfo = null; // new Intent(CuiBonoOld.this, AdInfo.class);
 			Bundle extras = new Bundle();
 			try {
 
@@ -129,9 +124,7 @@ public class CuiBonoOld extends Activity implements UncaughtExceptionHandler{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-		recordButton = (Button) findViewById(R.id.RecordButton);
-		recordButton.setOnClickListener(record);
+		setContentView(R.layout.test);
 		
 		Thread.setDefaultUncaughtExceptionHandler(this);
 	}

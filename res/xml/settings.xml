@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+          
+	<CheckBoxPreference android:key="location_enabled"
+		android:title="@string/location_enabled"
+		android:summary="@string/location_enabled_summary"
+		
+		android:defaultValue="true"
+		/>
+		
+</PreferenceScreen>

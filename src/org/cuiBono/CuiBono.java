@@ -9,8 +9,10 @@ import java.io.OutputStream;
 import java.nio.ByteOrder;
 
 import org.apache.commons.io.EndianUtils;
+import org.cuiBono.utils.ActionBarUtils;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
@@ -19,13 +21,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-public class CuiBono extends Activity {
+public class CuiBono extends Activity implements ActionBarUtils.HasActionMenu {
 	public static final String TAG = "AdHawk";
 	
 	// in milliseconds, how long to record for
@@ -51,26 +55,15 @@ public class CuiBono extends Activity {
 		setupControls();
 	}
 	
-	private class MyWebViewClient extends WebViewClient {
-		
-		@Override
-		public void onReceivedHttpAuthRequest(WebView view,
-		        HttpAuthHandler handler, String host, String realm) {
-
-		    handler.proceed("blannon", "122cuibono!WWW");
-
-		}
-		
-		public void onPageFinished(WebView view, String url) {
-            Log.i(TAG, "Finished loading URL: " +url);
-        }
-
-        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-            Log.e(TAG, "Error: " + description);
-        }
-	}
-	
 	public void setupControls() {
+		ActionBarUtils.setTitle(this, R.string.app_name, null);
+		
+		ActionBarUtils.setActionButton(this, R.id.action_2, R.drawable.preferences, new View.OnClickListener() {
+			public void onClick(View v) { 
+				startActivity(new Intent(CuiBono.this, Settings.class)); 
+			}
+		});
+		
 		this.findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				tagAd();
@@ -82,16 +75,6 @@ public class CuiBono extends Activity {
 		
 		results = (WebView) findViewById(R.id.results);
 		results.setBackgroundColor(0);
-		
-//		String host = getResources().getString(R.string.site_host);
-//		String realm = getResources().getString(R.string.site_realm);
-//		String username = getResources().getString(R.string.site_username);
-//		String password = getResources().getString(R.string.site_password);
-//		results.setHttpAuthUsernamePassword(host, realm, username, password);
-		
-//		results.setWebViewClient(new MyWebViewClient());
-//		
-//		results.loadUrl("http://adhawk.sunlightfoundation.com/ad/not_found.html");
 	}
 	
 	public void tagAd() {
@@ -105,6 +88,28 @@ public class CuiBono extends Activity {
 	
 	public void onTag(AdHawkException exception) {
 		error.setText(exception.getMessage());
+	}
+	
+	@Override 
+	public boolean onCreateOptionsMenu(Menu menu) { 
+		super.onCreateOptionsMenu(menu); 
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		menuSelected(item);
+		return true;
+	}
+	
+	@Override
+	public void menuSelected(MenuItem item) {
+		switch(item.getItemId()) { 
+		case R.id.settings:
+			startActivity(new Intent(this, Settings.class));
+			break;
+		}
 	}
 
 //	public JSONObject getAdArticles(String id) {
