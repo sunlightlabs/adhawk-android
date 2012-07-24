@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">WhoPaid?</string>
-    <string name="app_name">WhoPaid</string>
-<string name="record">Start Recording</string>
-<string name="ad_title">Info about this ad</string>
-<string name="ad_funder">who paid for this ad</string>
-<string name="adinfo_btn_lbl">find journalistic coverage</string>
-<string name="ad_transcript">test transcript</string>
+    <string name="app_name">Ad Hawk</string>
+	<string name="record">Start Recording</string>
+	<string name="ad_title">Info about this ad</string>
+	<string name="ad_funder">who paid for this ad</string>
+	<string name="adinfo_btn_lbl">find journalistic coverage</string>
+	<string name="ad_transcript">test transcript</string>
 </resources>
