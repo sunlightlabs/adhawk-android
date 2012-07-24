@@ -23,10 +23,10 @@ public class AdHawkServer {
 	public static final String TAG = "AdHawkServer";
 	
 	public static String findAd(String fingerprint) throws AdHawkException {
-		Map<String,String> params = new HashMap<String,String>();
+		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("fingerprint", fingerprint);
-		params.put("lat", "-47,9");
-		params.put("lon", "-123.43");
+		params.put("lat", 0);
+		params.put("lon", 0);
 		JSONObject response = postTo("http://adhawk.sunlightfoundation.com/api/ad/", params);
 		
 		String url;
@@ -41,11 +41,11 @@ public class AdHawkServer {
 		return url;
 	}
 	
-	public static String bodyFor(Map<String,String> params, boolean debug) {
+	public static String bodyFor(Map<String,Object> params, boolean debug) {
 		return new JSONObject(params).toString();
 	}
 	
-	public static String bodyFor(Map<String,String> params) {
+	public static String bodyFor(Map<String,Object> params) {
 		return bodyFor(params, false);
 	}
 	
@@ -53,7 +53,7 @@ public class AdHawkServer {
 		return new JSONObject(body);
 	}
 	
-	public static JSONObject postTo(String url, Map<String,String> params) throws AdHawkException {
+	public static JSONObject postTo(String url, Map<String,Object> params) throws AdHawkException {
 		//Log.d(TAG, "Fetching: " + url);
 		
 		HttpPost request = new HttpPost(url);
