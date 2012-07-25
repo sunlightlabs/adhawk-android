@@ -10,5 +10,8 @@
     <string name="location_enabled_summary">We use location to better understand political media markets.</string>
     
     <string name="listen">Listen</string>
+    <string name="share_text">Ad Hawk spotted an ad</string>
+    <string name="share_email_subject">I spotted a new super PAC ad</string>
+    <string name="hashtag">#adhawk</string>
     
 </resources>
