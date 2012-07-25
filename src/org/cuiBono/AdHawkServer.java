@@ -20,7 +20,7 @@ import android.util.Log;
 
 public class AdHawkServer {
 
-	public static final String USER_AGENT= "src.org.cuiBono.AdHawkServer";
+	public static final String USER_AGENT= "com.sunlightfoundation.com.android";
 	public static final String TAG = "AdHawkServer";
 	
 	static class Response implements Serializable {
@@ -61,6 +61,7 @@ public class AdHawkServer {
 	}
 	
 	public static JSONObject postTo(String url, Map<String,Object> params) throws AdHawkException {
+		url = url + "?client=app";
 		HttpPost request = new HttpPost(url);
         request.addHeader("User-Agent", USER_AGENT);
         
