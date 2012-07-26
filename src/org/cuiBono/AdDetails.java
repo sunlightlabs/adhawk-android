@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 public class AdDetails extends Activity implements ActionBarUtils.HasActionMenu {
@@ -49,6 +50,8 @@ public class AdDetails extends Activity implements ActionBarUtils.HasActionMenu 
 		ActionBarUtils.setActionMenu(this, R.menu.main);
 		
 		WebView results = (WebView) findViewById(R.id.content);
+		WebSettings settings = results.getSettings();
+		settings.setUserAgentString(AdHawkServer.USER_AGENT);
 		results.loadUrl(details.resultUrl);
 	}
 	

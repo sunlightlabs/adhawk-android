@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="background">#141414</color>
-	<color name="background_title">#2D4B6E</color>
+	<color name="background">#6E4B2D</color>
+	<color name="background_title">#141414</color>
+	<color name="background_footer">#AA141414</color>
 	
 	<color name="selector">#f58525</color>
 	
