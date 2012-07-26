@@ -5,6 +5,7 @@ import org.cuiBono.utils.ActionBarUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,10 +50,13 @@ public class AdDetails extends Activity implements ActionBarUtils.HasActionMenu 
 		
 		ActionBarUtils.setActionMenu(this, R.menu.main);
 		
+		Log.i(CuiBono.TAG, "AdDetails: loading webview");
 		WebView results = (WebView) findViewById(R.id.content);
 		WebSettings settings = results.getSettings();
 		settings.setUserAgentString(AdHawkServer.USER_AGENT);
+		settings.setJavaScriptEnabled(true);
 		results.loadUrl(details.resultUrl);
+//		results.loadUrl(getResources().getString(R.string.site_about));
 	}
 	
 	

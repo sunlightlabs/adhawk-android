@@ -23,6 +23,7 @@ public class About extends Activity {
 		WebView content = (WebView) findViewById(R.id.content);
 		WebSettings settings = content.getSettings();
 		settings.setUserAgentString(AdHawkServer.USER_AGENT);
+		settings.setJavaScriptEnabled(true);
 		content.loadUrl(getResources().getString(R.string.site_about));
 	}
 }

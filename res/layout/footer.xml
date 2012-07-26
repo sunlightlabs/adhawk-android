@@ -4,20 +4,18 @@
 	android:layout_height="wrap_content"
 	
 	android:layout_gravity="bottom"
-	
 	android:background="@color/background_footer"
-	
 	android:id="@+id/footer"
 	>
 	
 	<ImageView android:id="@+id/logo"
 		android:layout_width="wrap_content"
-		android:layout_height="53dp"
+		android:layout_height="50dp"
 		android:layout_gravity="right|center_vertical"
 		android:src="@drawable/logo"
 		
-		android:paddingTop="4dp"
-		android:paddingBottom="4dp"
+		android:paddingTop="10dp"
+		android:paddingBottom="10dp"
 		android:contentDescription="@string/organization_name"
 		/>
 	
