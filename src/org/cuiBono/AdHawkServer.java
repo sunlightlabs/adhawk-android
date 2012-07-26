@@ -20,7 +20,7 @@ import android.util.Log;
 
 public class AdHawkServer {
 
-	public static final String USER_AGENT= "com.sunlightfoundation.com.android";
+	public static final String USER_AGENT= "com.sunlightfoundation.adhawk.android";
 	public static final String TAG = "AdHawkServer";
 	
 	static class Response implements Serializable {
