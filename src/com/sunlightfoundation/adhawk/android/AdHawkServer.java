@@ -35,6 +35,11 @@ public class AdHawkServer {
 		public Response(JSONObject object) throws AdHawkException {
 			try {
 				resultUrl = object.getString("result_url");
+				
+				// fix in case the server drops the trailing slash
+				if (!resultUrl.endsWith("/"))
+					resultUrl += "/";
+				
 			} catch (JSONException e) {
 				throw new AdHawkException("No result URL in response body, or other problem", e);
 			} catch (Exception e) {
