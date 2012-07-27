@@ -1,4 +1,4 @@
-package org.cuiBono;
+package com.sunlightfoundation.adhawk.android;
 
 public class AdHawkException extends RuntimeException{
 	private static final long serialVersionUID = 5L;

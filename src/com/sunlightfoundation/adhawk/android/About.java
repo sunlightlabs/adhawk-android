@@ -1,10 +1,10 @@
-package org.cuiBono;
-
-import org.cuiBono.utils.ActionBarUtils;
-import org.cuiBono.utils.Utils;
+package com.sunlightfoundation.adhawk.android;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.sunlightfoundation.adhawk.android.utils.ActionBarUtils;
+import com.sunlightfoundation.adhawk.android.utils.Utils;
 
 public class About extends Activity {
 	

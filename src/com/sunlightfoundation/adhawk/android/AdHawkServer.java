@@ -1,4 +1,4 @@
-package org.cuiBono;
+package com.sunlightfoundation.adhawk.android;
 
 import java.io.IOException;
 import java.io.Serializable;

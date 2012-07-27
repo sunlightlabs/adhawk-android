@@ -1,17 +1,15 @@
-package org.cuiBono;
-
-import org.cuiBono.utils.ActionBarUtils;
-import org.cuiBono.utils.Utils;
+package com.sunlightfoundation.adhawk.android;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
+
+import com.sunlightfoundation.adhawk.android.utils.ActionBarUtils;
+import com.sunlightfoundation.adhawk.android.utils.Utils;
 
 public class AdDetails extends Activity implements ActionBarUtils.HasActionMenu {
 	private AdHawkServer.Response details;

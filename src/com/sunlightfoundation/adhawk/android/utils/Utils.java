@@ -1,12 +1,12 @@
-package org.cuiBono.utils;
-
-import org.cuiBono.AdHawkServer;
-import org.cuiBono.R;
+package com.sunlightfoundation.adhawk.android.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import com.sunlightfoundation.adhawk.android.AdHawkServer;
+import com.sunlightfoundation.adhawk.android.R;
 
 
 public class Utils {

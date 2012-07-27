@@ -1,4 +1,4 @@
-package org.cuiBono;
+package com.sunlightfoundation.adhawk.android;
 
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
@@ -9,8 +9,6 @@ import java.io.OutputStream;
 import java.nio.ByteOrder;
 
 import org.apache.commons.io.EndianUtils;
-import org.cuiBono.utils.ActionBarUtils;
-import org.cuiBono.utils.Utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -24,7 +22,9 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 
-public class CuiBono extends Activity {
+import com.sunlightfoundation.adhawk.android.utils.ActionBarUtils;
+
+public class AdHawk extends Activity {
 	public static final String TAG = "AdHawk";
 	
 	// in milliseconds, how long to record for
@@ -54,13 +54,13 @@ public class CuiBono extends Activity {
 		
 		ActionBarUtils.setActionButton(this, R.id.action_2, R.drawable.preferences, new View.OnClickListener() {
 			public void onClick(View v) { 
-				startActivity(new Intent(CuiBono.this, Settings.class)); 
+				startActivity(new Intent(AdHawk.this, Settings.class)); 
 			}
 		});
 		
 		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.about, new View.OnClickListener() {
 			public void onClick(View v) { 
-				startActivity(new Intent(CuiBono.this, About.class));
+				startActivity(new Intent(AdHawk.this, About.class));
 			}
 		});
 		
@@ -111,9 +111,9 @@ public class CuiBono extends Activity {
 	
 	private class TagAdTask extends AsyncTask<Void, String, AdHawkServer.Response> {
 		private AdHawkException exception;
-		private CuiBono activity;
+		private AdHawk activity;
 		
-		public TagAdTask(CuiBono activity) {
+		public TagAdTask(AdHawk activity) {
 			this.activity = activity;
 		}
 		

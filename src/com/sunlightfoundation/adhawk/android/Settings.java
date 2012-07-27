@@ -1,10 +1,10 @@
-package org.cuiBono;
-
-import org.cuiBono.utils.ActionBarUtils;
+package com.sunlightfoundation.adhawk.android;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+
+import com.sunlightfoundation.adhawk.android.utils.ActionBarUtils;
 
 public class Settings extends PreferenceActivity {
 	

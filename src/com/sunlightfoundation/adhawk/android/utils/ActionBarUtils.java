@@ -1,7 +1,4 @@
-package org.cuiBono.utils;
-
-import org.cuiBono.CuiBono;
-import org.cuiBono.R;
+package com.sunlightfoundation.adhawk.android.utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.sunlightfoundation.adhawk.android.AdHawk;
+import com.sunlightfoundation.adhawk.android.R;
 
 public class ActionBarUtils {
 	
@@ -29,7 +29,7 @@ public class ActionBarUtils {
 	}
 	
 	public static void setTitle(Activity activity, String title) {
-		setTitle(activity, title, new Intent(activity, CuiBono.class)); // default intent is home
+		setTitle(activity, title, new Intent(activity, AdHawk.class)); // default intent is home
 	}
 
 	public static void setTitle(Activity activity, int title) {

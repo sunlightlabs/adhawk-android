@@ -1,4 +1,4 @@
-package org.cuiBono.utils;
+package com.sunlightfoundation.adhawk.android.utils;
 
 import android.app.Activity;
 import android.view.Menu;
