@@ -11,26 +11,7 @@
 		
 	    <include layout="@layout/title_bar" />
 		
-	    <LinearLayout android:orientation="horizontal"
-	        android:layout_weight="0"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        >
-		    <TextView android:id="@+id/error"
-		        android:layout_weight="1"
-		        android:layout_width="0dp" 
-				android:layout_height="wrap_content"
-				/>
-	    </LinearLayout>
-	    
-	    <TextView android:id="@+id/progress"
-	        android:layout_weight="0"
-	        android:layout_width="match_parent" 
-			android:layout_height="wrap_content"
-			android:textSize="12sp"
-	        />
-	    
-		<FrameLayout android:id="@+id/content"
+		<FrameLayout android:id="@+id/listen"
 		    android:layout_weight="1"
 		    android:layout_width="match_parent"
 		    android:layout_height="0dp"
@@ -44,6 +25,76 @@
 				android:textSize="24dp"
 				android:text="@string/listen"
 		        />
+		    
+		</FrameLayout>
+		
+		<FrameLayout android:id="@+id/progress"
+		    android:layout_weight="1"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    
+		    android:visibility="gone"
+		    >
+		    
+		    <LinearLayout android:orientation="vertical"
+		        android:layout_gravity="center"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        >
+		        
+		        <!--  in progress -->
+		        
+			</LinearLayout>
+		    
+		</FrameLayout>
+		
+		<FrameLayout android:id="@+id/no_results"
+		    android:layout_weight="1"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    
+		    android:visibility="gone"
+		    >
+		    
+		    <LinearLayout android:orientation="vertical"
+		        android:layout_gravity="center"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        >
+		    
+			    <Button android:id="@+id/start_again"
+			        android:layout_width="250dp"
+					android:layout_height="100dp"
+					android:layout_gravity="center"
+					
+					android:textSize="24dp"
+					android:text="@string/listen_again"
+			        />
+			    
+			    <Button android:id="@+id/top_ads"
+			        android:layout_width="250dp"
+					android:layout_height="100dp"
+					android:layout_gravity="center"
+					
+					android:textSize="24dp"
+					android:text="@string/top_ads"
+			        />
+			</LinearLayout>
+		    
+		</FrameLayout>
+		
+		<FrameLayout android:id="@+id/top"
+		    android:layout_weight="1"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    
+		    android:visibility="gone"
+		    >
+		    
+		    <WebView android:id="@+id/top_ads_webview"
+			    android:layout_width="match_parent" 
+			    android:layout_height="match_parent"
+				/>
 		    
 		</FrameLayout>
 	    

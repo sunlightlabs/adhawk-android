@@ -11,9 +11,16 @@ import android.webkit.WebView;
 
 public class Utils {
 	
-	@SuppressLint("SetJavaScriptEnabled")
 	public static WebView webViewFor(Activity activity) {
-		WebView results = (WebView) activity.findViewById(R.id.content);
+		return webViewFor(activity, -1);
+	}
+	
+	@SuppressLint("SetJavaScriptEnabled")
+	public static WebView webViewFor(Activity activity, int id) {
+		if (id < 0)
+			id = R.id.content;
+		
+		WebView results = (WebView) activity.findViewById(id);
 		WebSettings settings = results.getSettings();
 		settings.setUserAgentString(AdHawkServer.USER_AGENT);
 		settings.setJavaScriptEnabled(true);
