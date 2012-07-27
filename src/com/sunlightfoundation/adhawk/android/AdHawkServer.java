@@ -28,6 +28,10 @@ public class AdHawkServer {
 		
 		public String resultUrl;
 		
+		public Response(String url) {
+			this.resultUrl = url;
+		}
+		
 		public Response(JSONObject object) throws AdHawkException {
 			try {
 				resultUrl = object.getString("result_url");
