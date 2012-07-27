@@ -12,6 +12,7 @@ import org.apache.commons.io.EndianUtils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
@@ -21,6 +22,7 @@ import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.sunlightfoundation.adhawk.android.utils.ActionBarUtils;
 
@@ -28,7 +30,7 @@ public class AdHawk extends Activity {
 	public static final String TAG = "AdHawk";
 	
 	// in milliseconds, how long to record for
-	public static final int RECORD_TIME = 2000; // 15000
+	public static final int RECORD_TIME = 15000; // 15000
 	
 	// load in echo nest library
 	static {
@@ -39,7 +41,7 @@ public class AdHawk extends Activity {
 	
 	 
 	private TagAdTask task;
-//	private TextView error, progress;
+	private TextView result, progress;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,13 @@ public class AdHawk extends Activity {
 			}
 		});
 		
-		this.findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				tagAd();
+			}
+		});
+		
+		findViewById(R.id.start_again).setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				tagAd();
 			}
@@ -73,9 +81,12 @@ public class AdHawk extends Activity {
 		findViewById(R.id.top_ads).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//Intent intent = new Intent(CuiBono.this, TopAds.class);
+				startActivity(new Intent(AdHawk.this, AdTop.class));
 			}
 		});
+		
+		result = (TextView) findViewById(R.id.results_message);
+		progress = (TextView) findViewById(R.id.progress_text);
 	}
 	
 	public void changeTo(int id) {
@@ -87,8 +98,10 @@ public class AdHawk extends Activity {
 	}
 	
 	public void tagAd() {
-		if (task == null)
+		if (task == null) {
+			changeTo(R.id.progress);
 			this.task = ((TagAdTask) new TagAdTask(this).execute());
+		}
 	}
 	
 	public void onTag(AdHawkServer.Response response) {
@@ -99,13 +112,13 @@ public class AdHawk extends Activity {
 			intent.putExtra("details", response);
 			startActivity(intent);
 		} else {
+			result.setText(R.string.match_empty);
 			changeTo(R.id.no_results);
-//			error.setText("Not found.");
 		}
 	}
 	
 	public void onTag(AdHawkException exception) {
-//		error.setText(exception.getMessage());
+		result.setText(R.string.match_error);
 		changeTo(R.id.no_results);
 	}
 	
@@ -119,7 +132,8 @@ public class AdHawk extends Activity {
 		
 		@Override
 		protected AdHawkServer.Response doInBackground(Void... nothing) {
-			publishProgress("Recording...");
+			Resources res = getResources();
+			publishProgress(res.getString(R.string.progress_recording));
 			
 			String fname;
 			try {
@@ -129,16 +143,16 @@ public class AdHawk extends Activity {
 				return null;
 				
 				// debug for emulators that won't record
-//				fname = null;
+				// fname = null;
 			}
 			
-			// force debug mode, will hardcode the fingerprint
-			//fname = null;
+			// force debug mode
+			// fname = null;
 			
 			String fingerprint;
 			if (fname != null) {
 				Log.i(TAG, "Recording: " + fname);
-				publishProgress("Generating fingerprint...");
+				publishProgress(res.getString(R.string.progress_fingerprinting));
 				
 				try {
 					fingerprint = getCodeGen(fname);
@@ -155,7 +169,7 @@ public class AdHawk extends Activity {
 			
 			Log.i(TAG, "Fingerprint: " + fingerprint);
 			
-			publishProgress("Done.");
+			publishProgress(res.getString(R.string.progress_matching));
 			 
 			
 			try {
@@ -169,6 +183,7 @@ public class AdHawk extends Activity {
 		@Override
 		protected void onProgressUpdate(String... message) {
 			Log.i(TAG, message[0]);	
+			progress.setText(message[0]);
 		}
 
 		@Override

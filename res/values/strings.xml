@@ -7,6 +7,7 @@
     <string name="menu_about">About</string>
     
     <string name="site_about">http://adhawk.sunlightfoundation.com/about/</string>
+    <string name="site_top_ads">http://adhawk.sunlightfoundation.com/ad/top/</string>
     
     <string name="location_enabled">Send my anonymous location</string>
     <string name="location_enabled_summary">We use location to better understand political media markets.</string>
@@ -18,4 +19,9 @@
     <string name="share_email_subject">I spotted a new super PAC ad</string>
     <string name="hashtag">#adhawk</string>
     
+    <string name="progress_recording">Recording, put me near the speaker…</string>
+    <string name="progress_fingerprinting">Trying to understand your baffling recording…</string>
+    <string name="progress_matching">OK, somehow think I understand, finding a matching ad…</string>
+    <string name="match_error">There was some kind of problem!</string>
+    <string name="match_empty">Sadly, I couldn\'t find a matching ad.</string>
 </resources>

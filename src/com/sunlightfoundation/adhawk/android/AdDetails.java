@@ -17,7 +17,7 @@ public class AdDetails extends Activity implements ActionBarUtils.HasActionMenu 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.ad_details);
+		setContentView(R.layout.webview_with_title);
 		
 		details = (AdHawkServer.Response) getIntent().getSerializableExtra("details");
 		

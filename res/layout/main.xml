@@ -36,15 +36,18 @@
 		    android:visibility="gone"
 		    >
 		    
-		    <LinearLayout android:orientation="vertical"
-		        android:layout_gravity="center"
-		        android:layout_width="match_parent"
+		    <TextView android:id="@+id/progress_text"
+		        android:layout_gravity="top|center_horizontal"
+		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        >
 		        
-		        <!--  in progress -->
+		        android:padding="10dp"
+		        android:textSize="18sp"
+		        />
 		        
-			</LinearLayout>
+		        
+			<!--  Hawk animation to go here -->
+		        
 		    
 		</FrameLayout>
 		
@@ -61,6 +64,16 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        >
+		        
+		        <TextView android:id="@+id/results_message"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            
+		            android:padding="10dp"
+		            android:layout_gravity="top|center_horizontal"
+		            
+		            android:textSize="18sp"
+		            />
 		    
 			    <Button android:id="@+id/start_again"
 			        android:layout_width="250dp"
