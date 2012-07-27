@@ -16,11 +16,11 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_CFLAGS += -I$(LOCAL_PATH)/boost/include/
+LOCAL_CFLAGS += -I/home/blannon/Boost-for-Android/build/include/boost-1_49/
 LOCAL_CPPFLAGS += -fexceptions
 LOCAL_CPPFLAGS += -frtti
 
-LOCAL_LDLIBS += -L$(LOCAL_PATH)/boost/lib/ -lboost_system  -lz
+LOCAL_LDLIBS += -L/home/blannon/Boost-for-Android/build/lib/ -lboost_system-gcc-mt-1_49  -lz
 LOCAL_MODULE    := echonest-codegen
 LOCAL_SRC_FILES := AudioBufferInput.cpp Base64.cpp Fingerprint.cpp MatrixUtility.cpp SubbandAnalysis.cpp Codegen.cpp  Whitening.cpp AudioStreamInput.cpp wrapper.h wrapper.cpp
 
