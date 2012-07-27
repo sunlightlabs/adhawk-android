@@ -133,7 +133,7 @@ public class AdHawk extends Activity {
 			}
 			
 			// force debug mode, will hardcode the fingerprint
-			fname = null;
+			//fname = null;
 			
 			String fingerprint;
 			if (fname != null) {
