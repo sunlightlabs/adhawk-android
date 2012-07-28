@@ -36,8 +36,11 @@ public class AdHawkServer {
 			try {
 				resultUrl = object.getString("result_url");
 				
+				if (resultUrl == "null")
+					resultUrl = null;
+				
 				// fix in case the server drops the trailing slash
-				if (!resultUrl.endsWith("/"))
+				if (resultUrl != null && !resultUrl.endsWith("/"))
 					resultUrl += "/";
 				
 			} catch (JSONException e) {
