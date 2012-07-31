@@ -98,7 +98,6 @@ public class AdHawk extends Activity {
 		progress = (TextView) findViewById(R.id.progress_text);
 		
 		changeTo(R.id.listen);
-		//changeTo(R.id.no_results);
 	}
 	
 	public void changeTo(int id) {

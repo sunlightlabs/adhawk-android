@@ -15,6 +15,12 @@ public class Utils {
 		return webViewFor(activity, -1);
 	}
 	
+	// is this URL an AdHawk ad details URL?
+	public static boolean isDetailsUrl(String url) {
+		
+		return true;
+	}
+	
 	@SuppressLint("SetJavaScriptEnabled")
 	public static WebView webViewFor(Activity activity, int id) {
 		if (id < 0)

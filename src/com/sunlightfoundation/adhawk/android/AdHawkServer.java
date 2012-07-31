@@ -9,7 +9,9 @@ import java.util.Map;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -27,11 +29,7 @@ public class AdHawkServer {
 		private static final long serialVersionUID = 7L;
 		
 		public String resultUrl;
-		
-		public Response(String url) {
-			this.resultUrl = url;
-		}
-		
+				
 		public Response(JSONObject object) throws AdHawkException {
 			try {
 				resultUrl = object.getString("result_url");
@@ -49,6 +47,10 @@ public class AdHawkServer {
 				throw new AdHawkException("Some problem reading response from Ad Hawk", e);
 			}
 		}
+	}
+	
+	public static AdHawkServer.Response getAd(String jsonUrl) throws AdHawkException {
+		return new AdHawkServer.Response(getFrom(jsonUrl));
 	}
 	
 	public static AdHawkServer.Response findAd(String fingerprint) throws AdHawkException {
@@ -72,18 +74,31 @@ public class AdHawkServer {
 		return new JSONObject(body);
 	}
 	
+	public static JSONObject getFrom(String url) throws AdHawkException {
+		url = url + "?client=app";
+		HttpGet request = new HttpGet(url);
+        return makeRequest(request, url);
+	}
+	
 	public static JSONObject postTo(String url, Map<String,Object> params) throws AdHawkException {
 		url = url + "?client=app";
 		HttpPost request = new HttpPost(url);
         request.addHeader("User-Agent", USER_AGENT);
-        
         String body = bodyFor(params);
-        
-        request.addHeader("Content-type", "application/json");
         
         try {
         	request.setEntity(new StringEntity(body));
-        	
+        } catch (UnsupportedEncodingException e) {
+        	throw new AdHawkException("Unsupported encoding for some reason: " + body, e);
+		}
+        
+        return makeRequest(request, url);
+	}
+	
+	public static JSONObject makeRequest(HttpUriRequest request, String url) throws AdHawkException {
+		try {
+        	request.addHeader("User-Agent", USER_AGENT);
+        	request.addHeader("Content-type", "application/json");
 	        HttpResponse response = new DefaultHttpClient().execute(request);
 	        int statusCode = response.getStatusLine().getStatusCode();
 	        
@@ -97,9 +112,7 @@ public class AdHawkServer {
 	        	throw new AdHawkException("Bad status code " + statusCode + " on fetching JSON from " + url);
         } catch (JSONException e) {
         	throw new AdHawkException("Problem parsing response JSON", e);
-        } catch (UnsupportedEncodingException e) {
-        	throw new AdHawkException("Unsupported encoding for some reason", e);
-		} catch (ClientProtocolException e) {
+        } catch (ClientProtocolException e) {
 	    	throw new AdHawkException("Problem fetching JSON from " + url, e);
 	    } catch (IOException e) {
 	    	throw new AdHawkException("Problem fetching JSON from " + url, e);

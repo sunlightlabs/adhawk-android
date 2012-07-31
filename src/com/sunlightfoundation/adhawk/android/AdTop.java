@@ -21,8 +21,6 @@ public class AdTop extends Activity {
 		setupControls();
 	}
 	
-	
-	
 	@SuppressLint("SetJavaScriptEnabled")
 	public void setupControls() {
 		ActionBarUtils.setTitle(this, R.string.top_ads);
@@ -38,13 +36,10 @@ public class AdTop extends Activity {
 		webview.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				if (!url.endsWith("/"))
-					url = url + "/";
-				
 				Intent intent = new Intent(AdTop.this, AdDetails.class);
-				intent.putExtra("details", new AdHawkServer.Response(url));
+				intent.putExtra("url", url);
 				startActivity(intent);
-				return false;
+				return true;
 			}
 		});
 		
