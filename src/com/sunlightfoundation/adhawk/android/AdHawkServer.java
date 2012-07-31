@@ -28,11 +28,12 @@ public class AdHawkServer {
 	static class Response implements Serializable {
 		private static final long serialVersionUID = 7L;
 		
-		public String resultUrl;
+		public String resultUrl, shareText;
 				
 		public Response(JSONObject object) throws AdHawkException {
 			try {
 				resultUrl = object.getString("result_url");
+				shareText = object.getString("share_text");
 				
 				if (resultUrl == "null")
 					resultUrl = null;
@@ -40,6 +41,9 @@ public class AdHawkServer {
 				// fix in case the server drops the trailing slash
 				if (resultUrl != null && !resultUrl.endsWith("/"))
 					resultUrl += "/";
+				
+				if (shareText == "null")
+					shareText = null;
 				
 			} catch (JSONException e) {
 				throw new AdHawkException("No result URL in response body, or other problem", e);

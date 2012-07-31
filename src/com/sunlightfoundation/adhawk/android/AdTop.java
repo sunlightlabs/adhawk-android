@@ -36,10 +36,13 @@ public class AdTop extends Activity {
 		webview.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				Intent intent = new Intent(AdTop.this, AdDetails.class);
-				intent.putExtra("url", url);
-				startActivity(intent);
-				return true;
+				if (Utils.isDetailsUrl(url)) {
+					Intent intent = new Intent(AdTop.this, AdDetails.class);
+					intent.putExtra("url", url);
+					startActivity(intent);
+					return true;
+				} else
+					return false;
 			}
 		});
 		

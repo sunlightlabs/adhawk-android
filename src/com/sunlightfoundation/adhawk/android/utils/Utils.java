@@ -17,8 +17,7 @@ public class Utils {
 	
 	// is this URL an AdHawk ad details URL?
 	public static boolean isDetailsUrl(String url) {
-		
-		return true;
+		return (url.indexOf("/ad/top/") > 0);
 	}
 	
 	@SuppressLint("SetJavaScriptEnabled")

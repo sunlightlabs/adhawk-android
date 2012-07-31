@@ -48,12 +48,8 @@ public class AdDetails extends Activity implements ActionBarUtils.HasActionMenu 
 		
 		ActionBarUtils.setActionButton(this, R.id.action_2, R.drawable.share, new View.OnClickListener() {
 			public void onClick(View v) { 
-				String shareText = getResources().getString(R.string.share_text) + 
-						" " + details.resultUrl + " " +
-						getResources().getString(R.string.hashtag);
-				
 				Intent intent = new Intent(Intent.ACTION_SEND).setType("text/plain")
-						.putExtra(Intent.EXTRA_TEXT, shareText)
+						.putExtra(Intent.EXTRA_TEXT, details.shareText)
 						.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.share_email_subject));
 	    		startActivity(Intent.createChooser(intent, "Share this ad:"));
 			}
