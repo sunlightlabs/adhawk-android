@@ -2,8 +2,8 @@
 <resources>
     
     <style name="MainTheme" parent="RootTheme">
-        <item name="android:windowBackground">@color/background</item>
-        <item name="android:colorBackground">@color/background</item>
+        <item name="android:windowBackground">@drawable/main</item>
+        <item name="android:colorBackground">@drawable/main</item>
         <item name="android:textColorLink">@color/text_link</item>
         <item name="android:textColorPrimary">@color/text</item>
         <item name="android:textColorSecondary">@color/text</item>
