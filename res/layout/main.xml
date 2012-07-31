@@ -21,14 +21,14 @@
 		    android:visibility="gone"
 		    >
 		    
-		    <Button android:id="@+id/start"
-		        android:layout_width="250dp"
-				android:layout_height="100dp"
+		    <ImageView android:id="@+id/start"
+		        android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				
 				android:layout_gravity="center"
 				
-				android:textSize="24dp"
-				android:text="@string/listen"
-		        />
+				android:background="@drawable/listen"
+				/>
 		    
 		</FrameLayout>
 		
@@ -50,9 +50,27 @@
 		        android:textSize="20sp"
 		        />
 		        
-		        
-			<!--  Hawk animation to go here -->
 		    
+		    <FrameLayout
+		        android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				
+				android:layout_gravity="center"
+				
+				android:background="@drawable/listening"
+				>
+				
+		        <ImageView android:id="@+id/hawk"
+		            android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					
+					android:layout_gravity="center"
+					
+		        	/>
+		        
+		    </FrameLayout>
+		    
+		    <!-- 
 		    <ProgressBar android:id="@+id/spinner"
 		   		android:layout_width="wrap_content"
 		   		android:layout_height="wrap_content"
@@ -61,6 +79,7 @@
 		   		
 		   		android:layout_gravity="center"
 		   		/>
+		    -->
 		    
 		</FrameLayout>
 		

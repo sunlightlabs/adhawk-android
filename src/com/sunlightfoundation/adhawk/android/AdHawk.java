@@ -13,6 +13,7 @@ import org.apache.commons.io.EndianUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
@@ -22,6 +23,7 @@ import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunlightfoundation.adhawk.android.utils.ActionBarUtils;
@@ -42,6 +44,9 @@ public class AdHawk extends Activity {
 	 
 	private TagAdTask task;
 	private TextView result, progress;
+	
+	// Phil
+	private AnimationDrawable hawk;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +90,10 @@ public class AdHawk extends Activity {
 			}
 		});
 		
+		ImageView hawkImage = (ImageView) findViewById(R.id.hawk);
+		hawkImage.setBackgroundResource(R.drawable.animation);
+		hawk = (AnimationDrawable) hawkImage.getBackground();
+		
 		result = (TextView) findViewById(R.id.results_message);
 		progress = (TextView) findViewById(R.id.progress_text);
 		
@@ -97,7 +106,10 @@ public class AdHawk extends Activity {
 		findViewById(R.id.progress).setVisibility(View.GONE);
 		findViewById(R.id.no_results).setVisibility(View.GONE);
 		
+		hawk.stop();
 		findViewById(id).setVisibility(View.VISIBLE);
+		if (id == R.id.progress)
+			hawk.start();
 	}
 	
 	public void tagAd() {
