@@ -63,11 +63,11 @@ public class AdDetails extends Activity implements ActionBarUtils.HasActionMenu 
 		
 		ActionBarUtils.setActionMenu(this, R.menu.main);
 		
-		Utils.webViewFor(this).loadUrl(details.resultUrl);
+		loadAd();
 	}
 	
 	public void loadAd() {
-		Utils.webViewFor(this).loadUrl(details.resultUrl);
+		Utils.loadUrl(Utils.webViewFor(this), details.resultUrl);
 	}
 	
 	public void getAd(String url) {

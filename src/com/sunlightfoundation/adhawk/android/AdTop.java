@@ -5,25 +5,37 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.sunlightfoundation.adhawk.android.utils.ActionBarUtils;
 import com.sunlightfoundation.adhawk.android.utils.Utils;
 
 public class AdTop extends Activity {
+	public static final int SITE_TOP = 0;
+	public static final int SITE_ABOUT = 1;
+	
+	private String title, url;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.webview_with_title);
 		
+		int type = getIntent().getIntExtra("type", SITE_TOP);
+		
+		if (type == SITE_TOP) {
+			title = getResources().getString(R.string.top_ads);
+			url = getResources().getString(R.string.site_top_ads);
+		} else if (type == SITE_ABOUT) {
+			title = getResources().getString(R.string.app_name);
+			url = getResources().getString(R.string.site_about);
+		}
+		
 		setupControls();
 	}
 	
 	@SuppressLint("SetJavaScriptEnabled")
 	public void setupControls() {
-		ActionBarUtils.setTitle(this, R.string.top_ads);
+		ActionBarUtils.setTitle(this, title);
 		
 		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.about, new View.OnClickListener() {
 			public void onClick(View v) { 
@@ -31,21 +43,6 @@ public class AdTop extends Activity {
 			}
 		});
 		
-		WebView webview = Utils.webViewFor(this);
-		
-		webview.setWebViewClient(new WebViewClient() {
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				if (Utils.isDetailsUrl(url)) {
-					Intent intent = new Intent(AdTop.this, AdDetails.class);
-					intent.putExtra("url", url);
-					startActivity(intent);
-					return true;
-				} else
-					return false;
-			}
-		});
-		
-		webview.loadUrl(getResources().getString(R.string.site_top_ads));
+		Utils.loadUrl(Utils.webViewFor(this), url);
 	}
 }
