@@ -46,7 +46,6 @@
 		        android:padding="10dp"
 		        android:layout_marginTop="30dp"
 		        android:textSize="20sp"
-		        android:visibility="gone"
 		        />
 		     
 		    <FrameLayout
@@ -65,6 +64,9 @@
 					android:layout_marginLeft="28dp"
 					android:layout_marginTop="120dp"
 					
+					android:layout_gravity="top|left"
+					
+					android:background="@drawable/hawk0001"
 		        	/>
 		        
 		    </FrameLayout>
