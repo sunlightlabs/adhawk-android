@@ -19,21 +19,14 @@
 		    android:visibility="gone"
 		    >
 		    
-<!-- 		    <FrameLayout -->
-<!-- 		        android:layout_width="238dp" -->
-<!-- 				android:layout_height="266dp" -->
-<!-- 				android:layout_gravity="center" -->
-<!-- 				> -->
-		    
-			    <ImageView android:id="@+id/start"
-			        android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					
-					android:layout_gravity="center"
-					
-					android:background="@drawable/listen"
-					/>
-<!-- 		   </FrameLayout> -->
+			<ImageView android:id="@+id/start"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				
+				android:layout_gravity="center"
+				
+				android:background="@drawable/listen"
+				/>
 		    
 		</FrameLayout>
 		
@@ -76,16 +69,6 @@
 		        
 		    </FrameLayout>
 		    
-		    <!-- 
-		    <ProgressBar android:id="@+id/spinner"
-		   		android:layout_width="wrap_content"
-		   		android:layout_height="wrap_content"
-		   		
-		   		style="?android:attr/progressBarStyleLarge"
-		   		
-		   		android:layout_gravity="center"
-		   		/>
-		    -->
 		    
 		</FrameLayout>
 		
