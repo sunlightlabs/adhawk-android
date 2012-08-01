@@ -22,6 +22,7 @@
     <string name="progress_recording">Recording, put me near the speaker…</string>
     <string name="progress_fingerprinting">Trying to understand your baffling recording…</string>
     <string name="progress_matching">OK, somehow think I understand, finding a matching ad…</string>
+    <string name="progress_location">Attaching your location…</string>
     <string name="match_error">There was some kind of problem!</string>
     <string name="match_empty">Sadly, I couldn\'t find a matching ad.</string>
 </resources>

@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
+import android.location.Location;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
@@ -27,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunlightfoundation.adhawk.android.utils.ActionBarUtils;
+import com.sunlightfoundation.adhawk.android.utils.LocationUtils;
 
 public class AdHawk extends Activity {
 	public static final String TAG = "AdHawk";
@@ -187,11 +189,25 @@ public class AdHawk extends Activity {
 			
 			Log.i(TAG, "Fingerprint: " + fingerprint);
 			
+			publishProgress(res.getString(R.string.progress_location));
+			Location location = LocationUtils.getLastKnownLocation(AdHawk.this);
+			
+			if (location != null) {
+				Log.i(AdHawk.TAG, "[" + location.getProvider() + "] Using last known location: (" +
+					location.getLatitude() + "," + location.getLongitude() + ") - " +
+					((System.currentTimeMillis() - location.getTime()) / 1000) + " seconds ago"
+				);
+			} else
+				Log.i(AdHawk.TAG, "No location found.");
+			
+			
 			publishProgress(res.getString(R.string.progress_matching));
-			 
 			
 			try {
-				return AdHawkServer.findAd(fingerprint);
+				if (location != null)
+					return AdHawkServer.findAd(fingerprint, location.getLatitude(), location.getLongitude());
+				else
+					return AdHawkServer.findAd(fingerprint);
 			} catch (AdHawkException e) {
 				this.exception = e;
 			}

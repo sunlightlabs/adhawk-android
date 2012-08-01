@@ -58,10 +58,14 @@ public class AdHawkServer {
 	}
 	
 	public static AdHawkServer.Response findAd(String fingerprint) throws AdHawkException {
+		return findAd(fingerprint, 0, 0);
+	}
+	
+	public static AdHawkServer.Response findAd(String fingerprint, double lat, double lon) throws AdHawkException {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("fingerprint", fingerprint);
-		params.put("lat", 0);
-		params.put("lon", 0);
+		params.put("lat", lat);
+		params.put("lon", lon);
 		
 		return new AdHawkServer.Response(postTo("http://adhawk.sunlightfoundation.com/api/ad/", params));
 	}
@@ -79,16 +83,16 @@ public class AdHawkServer {
 	}
 	
 	public static JSONObject getFrom(String url) throws AdHawkException {
-		url = url + "?client=app";
 		HttpGet request = new HttpGet(url);
         return makeRequest(request, url);
 	}
 	
 	public static JSONObject postTo(String url, Map<String,Object> params) throws AdHawkException {
-		url = url + "?client=app";
 		HttpPost request = new HttpPost(url);
         request.addHeader("User-Agent", USER_AGENT);
         String body = bodyFor(params);
+        
+        Log.d(TAG, "Including body: " + body);
         
         try {
         	request.setEntity(new StringEntity(body));
@@ -103,14 +107,18 @@ public class AdHawkServer {
 		try {
         	request.addHeader("User-Agent", USER_AGENT);
         	request.addHeader("Content-type", "application/json");
+        	
+        	Log.d(TAG, "Requesting: " + request.getClass().getSimpleName() + " - " + url + "\n\n");
+        	
 	        HttpResponse response = new DefaultHttpClient().execute(request);
 	        int statusCode = response.getStatusLine().getStatusCode();
 	        
-	        if (statusCode == HttpStatus.SC_OK) {
-	        	String responseBody = EntityUtils.toString(response.getEntity());
-	        	Log.i(TAG, "Received: " + responseBody);
+	        String responseBody = EntityUtils.toString(response.getEntity());
+        	Log.d(TAG, "Responsing: " + responseBody);
+        	
+	        if (statusCode == HttpStatus.SC_OK)
 	        	return responseFor(responseBody);
-	        } else if (statusCode == HttpStatus.SC_NOT_FOUND)
+	        else if (statusCode == HttpStatus.SC_NOT_FOUND)
 	        	throw new AdHawkException("404 Not Found from " + url);
 	        else
 	        	throw new AdHawkException("Bad status code " + statusCode + " on fetching JSON from " + url);
