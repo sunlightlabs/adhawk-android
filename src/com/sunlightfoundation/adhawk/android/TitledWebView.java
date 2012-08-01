@@ -9,10 +9,12 @@ import android.view.View;
 import com.sunlightfoundation.adhawk.android.utils.ActionBarUtils;
 import com.sunlightfoundation.adhawk.android.utils.Utils;
 
-public class AdTop extends Activity {
+public class TitledWebView extends Activity {
+	public static final int SITE_CUSTOM = -1;
 	public static final int SITE_TOP = 0;
 	public static final int SITE_ABOUT = 1;
 	
+	private int type;
 	private String title, url;
 	
 	@Override
@@ -20,7 +22,7 @@ public class AdTop extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.webview_with_title);
 		
-		int type = getIntent().getIntExtra("type", SITE_TOP);
+		type = getIntent().getIntExtra("type", SITE_CUSTOM);
 		
 		if (type == SITE_TOP) {
 			title = getResources().getString(R.string.top_ads);
@@ -28,6 +30,9 @@ public class AdTop extends Activity {
 		} else if (type == SITE_ABOUT) {
 			title = getResources().getString(R.string.app_name);
 			url = getResources().getString(R.string.site_about);
+		} else if (type == SITE_CUSTOM) {
+			title = getIntent().getStringExtra("title");
+			url = getIntent().getStringExtra("url");
 		}
 		
 		setupControls();
@@ -37,11 +42,15 @@ public class AdTop extends Activity {
 	public void setupControls() {
 		ActionBarUtils.setTitle(this, title);
 		
-		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.about, new View.OnClickListener() {
-			public void onClick(View v) { 
-				startActivity(new Intent(AdTop.this, About.class));
-			}
-		});
+		if (type != SITE_ABOUT) {
+			ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.about, new View.OnClickListener() {
+				public void onClick(View v) {
+					Intent intent = new Intent(TitledWebView.this, TitledWebView.class)
+						.putExtra("type", SITE_ABOUT);
+					startActivity(intent);
+				}
+			});
+		}
 		
 		Utils.loadUrl(Utils.webViewFor(this), url);
 	}

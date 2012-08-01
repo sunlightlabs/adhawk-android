@@ -57,7 +57,9 @@ public class AdDetails extends Activity implements ActionBarUtils.HasActionMenu 
 		
 		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.about, new View.OnClickListener() {
 			public void onClick(View v) { 
-				startActivity(new Intent(AdDetails.this, About.class));
+				startActivity(new Intent(AdDetails.this, TitledWebView.class)
+					.putExtra("type", TitledWebView.SITE_ABOUT)
+				);
 			}
 		});
 		

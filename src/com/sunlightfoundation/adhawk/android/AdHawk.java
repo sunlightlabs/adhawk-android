@@ -67,7 +67,9 @@ public class AdHawk extends Activity {
 		
 		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.about, new View.OnClickListener() {
 			public void onClick(View v) { 
-				startActivity(new Intent(AdHawk.this, About.class));
+				startActivity(new Intent(AdHawk.this, TitledWebView.class)
+					.putExtra("type", TitledWebView.SITE_ABOUT)
+				);
 			}
 		});
 		
@@ -86,7 +88,9 @@ public class AdHawk extends Activity {
 		findViewById(R.id.top_ads).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(AdHawk.this, AdTop.class));
+				startActivity(new Intent(AdHawk.this, TitledWebView.class)
+					.putExtra("type", TitledWebView.SITE_TOP)
+				);
 			}
 		});
 		
