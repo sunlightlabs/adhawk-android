@@ -89,7 +89,6 @@ public class AdHawkServer {
 	
 	public static JSONObject postTo(String url, Map<String,Object> params) throws AdHawkException {
 		HttpPost request = new HttpPost(url);
-        request.addHeader("User-Agent", USER_AGENT);
         String body = bodyFor(params);
         
         Log.d(TAG, "Including body: " + body);
