@@ -1,5 +1,6 @@
 package com.sunlightfoundation.adhawk.android;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -28,4 +29,9 @@ public class Settings extends PreferenceActivity {
 		addPreferencesFromResource(R.xml.settings);
 		PreferenceManager.setDefaultValues(this, R.xml.settings, false);
 	}
+	
+	public static boolean locationEnabled(Context context) {
+		return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(LOCATION_ENABLED_KEY, LOCATION_ENABLED_DEFAULT);
+	}
+	
 }

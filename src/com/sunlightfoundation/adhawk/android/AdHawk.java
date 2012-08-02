@@ -189,16 +189,22 @@ public class AdHawk extends Activity {
 			
 			Log.i(TAG, "Fingerprint: " + fingerprint);
 			
-			publishProgress(res.getString(R.string.progress_location));
-			Location location = LocationUtils.getLastKnownLocation(AdHawk.this);
+			Location location = null;
 			
-			if (location != null) {
-				Log.i(AdHawk.TAG, "[" + location.getProvider() + "] Using last known location: (" +
-					location.getLatitude() + "," + location.getLongitude() + ") - " +
-					((System.currentTimeMillis() - location.getTime()) / 1000) + " seconds ago"
-				);
+			if (Settings.locationEnabled(AdHawk.this)) {
+				publishProgress(res.getString(R.string.progress_location));
+				location = LocationUtils.getLastKnownLocation(AdHawk.this);
+				
+				if (location != null) {
+					Log.i(AdHawk.TAG, "[" + location.getProvider() + "] Using last known location: (" +
+						location.getLatitude() + "," + location.getLongitude() + ") - " +
+						((System.currentTimeMillis() - location.getTime()) / 1000) + " seconds ago"
+					);
+				} else
+					Log.i(AdHawk.TAG, "No location found.");
+				
 			} else
-				Log.i(AdHawk.TAG, "No location found.");
+				Log.i(TAG, "Location disabled, not looking");
 			
 			
 			publishProgress(res.getString(R.string.progress_matching));
