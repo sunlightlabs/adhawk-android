@@ -22,7 +22,7 @@ public class Settings extends PreferenceActivity {
 	}
 	
 	public void setupControls() {
-		ActionBarUtils.setTitle(this, R.string.app_name);
+		ActionBarUtils.setTitle(this, R.string.menu_settings);
 	}
 	
 	public void setupPreferences() {
