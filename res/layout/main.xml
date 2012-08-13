@@ -79,7 +79,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="0dp"
 		    
-		    android:visibility="gone"
+		    android:visibility="visible"
 		    >
 		    
 		    <LinearLayout android:orientation="vertical"
@@ -96,24 +96,22 @@
 		            android:layout_gravity="top|center_horizontal"
 		            
 		            android:textSize="18sp"
+		            android:text="@string/match_empty"
 		            />
 		    
-			    <Button android:id="@+id/start_again"
-			        android:layout_width="250dp"
-					android:layout_height="100dp"
-					android:layout_gravity="center"
-					
-					android:textSize="24dp"
-					android:text="@string/listen_again"
+		        <Button style="@style/NoResultsButton" 
+		            android:id="@+id/why_no_results"
+					android:text="@string/why_no_results"
+			        />
+		        
+			    <Button style="@style/NoResultsButton"
+			        android:id="@+id/start_again"
+			        android:text="@string/listen_again"
 			        />
 			    
-			    <Button android:id="@+id/top_ads"
-			        android:layout_width="250dp"
-					android:layout_height="100dp"
-					android:layout_gravity="center"
-					
-					android:textSize="24dp"
-					android:text="@string/top_ads"
+			    <Button style="@style/NoResultsButton" 
+			        android:id="@+id/top_ads"
+			        android:text="@string/top_ads"
 			        />
 			</LinearLayout>
 		    
