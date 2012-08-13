@@ -20,6 +20,7 @@
     <string name="share_email_subject">I spotted a new super PAC ad</string>
     <string name="hashtag">#adhawk</string>
     
+    <string name="progress">Identifying…</string>
     <string name="progress_recording">Recording, put me near the speaker…</string>
     <string name="progress_fingerprinting">Trying to understand your baffling recording…</string>
     <string name="progress_matching">OK, somehow think I understand, finding a matching ad…</string>
