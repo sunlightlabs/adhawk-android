@@ -8,6 +8,7 @@
     
     <string name="site_about">http://adhawk.sunlightfoundation.com/about/</string>
     <string name="site_top_ads">http://adhawk.sunlightfoundation.com/ad/top/</string>
+    <string name="site_why_no_results">http://adhawk.sunlightfoundation.com/troubleshooting/</string>
     
     <string name="location_enabled">Send my anonymous location</string>
     <string name="location_enabled_summary">We use location to better understand political media markets.</string>

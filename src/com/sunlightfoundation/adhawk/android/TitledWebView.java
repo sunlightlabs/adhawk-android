@@ -13,6 +13,7 @@ public class TitledWebView extends Activity {
 	public static final int SITE_CUSTOM = -1;
 	public static final int SITE_TOP = 0;
 	public static final int SITE_ABOUT = 1;
+	public static final int SITE_WHY_NO_RESULTS = 2;
 	
 	private int type;
 	private String title, url;
@@ -30,6 +31,9 @@ public class TitledWebView extends Activity {
 		} else if (type == SITE_ABOUT) {
 			title = getResources().getString(R.string.app_name);
 			url = getResources().getString(R.string.site_about);
+		} else if (type == SITE_WHY_NO_RESULTS) {
+			title = getResources().getString(R.string.why_no_results);
+			url = getResources().getString(R.string.site_why_no_results);
 		} else if (type == SITE_CUSTOM) {
 			title = getIntent().getStringExtra("title");
 			url = getIntent().getStringExtra("url");

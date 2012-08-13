@@ -96,6 +96,15 @@ public class AdHawk extends Activity {
 			}
 		});
 		
+		findViewById(R.id.why_no_results).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(AdHawk.this, TitledWebView.class)
+					.putExtra("type", TitledWebView.SITE_WHY_NO_RESULTS)
+				);
+			}
+		});
+		
 		ImageView hawkImage = (ImageView) findViewById(R.id.hawk);
 		hawkImage.setBackgroundResource(R.drawable.animation);
 		hawk = (AnimationDrawable) hawkImage.getBackground();
