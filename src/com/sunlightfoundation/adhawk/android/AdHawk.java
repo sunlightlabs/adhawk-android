@@ -45,7 +45,7 @@ public class AdHawk extends Activity {
 	
 	 
 	private TagAdTask task;
-	private TextView result, progress;
+	private TextView result;
 	
 	// Phil
 	private AnimationDrawable hawk;
@@ -101,7 +101,7 @@ public class AdHawk extends Activity {
 		hawk = (AnimationDrawable) hawkImage.getBackground();
 		
 		result = (TextView) findViewById(R.id.results_message);
-		progress = (TextView) findViewById(R.id.progress_text);
+//		progress = (TextView) findViewById(R.id.progress_text);
 		
 		changeTo(R.id.listen);
 	}
@@ -223,7 +223,7 @@ public class AdHawk extends Activity {
 		@Override
 		protected void onProgressUpdate(String... message) {
 			Log.i(TAG, message[0]);	
-			progress.setText(message[0]);
+//			progress.setText(message[0]);
 		}
 
 		@Override
