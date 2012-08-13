@@ -105,6 +105,7 @@ public class AdHawkServer {
 	public static JSONObject makeRequest(HttpUriRequest request, String url) throws AdHawkException {
 		try {
         	request.addHeader("User-Agent", USER_AGENT);
+        	request.addHeader("X-Client-App", USER_AGENT);
         	request.addHeader("Content-type", "application/json");
         	
         	Log.d(TAG, "Requesting: " + request.getClass().getSimpleName() + " - " + url + "\n\n");
@@ -113,7 +114,6 @@ public class AdHawkServer {
 	        int statusCode = response.getStatusLine().getStatusCode();
 	        
 	        String responseBody = EntityUtils.toString(response.getEntity());
-        	Log.d(TAG, "Responsing: " + responseBody);
         	
 	        if (statusCode == HttpStatus.SC_OK)
 	        	return responseFor(responseBody);

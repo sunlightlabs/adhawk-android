@@ -31,7 +31,7 @@ public class AdDetails extends Activity implements ActionBarUtils.HasActionMenu 
 		if (details != null)
 			setupAd();
 		else
-			getAd(url);
+			getAd(url); // URL is assumed to be a JSON link
 	}
 	
 	public void setupControls() {
@@ -90,6 +90,7 @@ public class AdDetails extends Activity implements ActionBarUtils.HasActionMenu 
 	
 	public void onGetAd(AdHawkException exception) {
 		// er
+		Log.e(AdHawk.TAG, "Exception loading JSON", exception);
 	}
 	
 	@Override 
