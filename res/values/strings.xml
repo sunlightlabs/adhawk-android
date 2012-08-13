@@ -14,7 +14,7 @@
     
     <string name="listen">Listen</string>
     <string name="why_no_results">Why No Results</string>
-    <string name="listen_again">Identify again</string>
+    <string name="listen_again">Identify Again</string>
     <string name="top_ads">View Popular</string>
     <string name="share_text">Ad Hawk spotted an ad</string>
     <string name="share_email_subject">I spotted a new super PAC ad</string>
@@ -24,6 +24,6 @@
     <string name="progress_fingerprinting">Trying to understand your baffling recording…</string>
     <string name="progress_matching">OK, somehow think I understand, finding a matching ad…</string>
     <string name="progress_location">Attaching your location…</string>
-    <string name="match_error">There was some kind of problem!</string>
+    <string name="match_error">There was an error while identifying.</string>
     <string name="match_empty">Sorry, Ad Hawk missed that.</string>
 </resources>
