@@ -49,6 +49,7 @@ public class AdHawk extends Activity {
 	
 	// Phil
 	private AnimationDrawable hawk;
+	private ImageView hawkImage;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -105,14 +106,42 @@ public class AdHawk extends Activity {
 			}
 		});
 		
-		ImageView hawkImage = (ImageView) findViewById(R.id.hawk);
-		hawkImage.setBackgroundResource(R.drawable.animation);
-		hawk = (AnimationDrawable) hawkImage.getBackground();
+		hawkImage = (ImageView) findViewById(R.id.hawk);
+		 
+		loadHawk();
 		
 		result = (TextView) findViewById(R.id.results_message);
 //		progress = (TextView) findViewById(R.id.progress_text);
 		
 		changeTo(R.id.listen);
+	}
+	
+	public void loadHawk() {
+		hawkImage.setBackgroundResource(R.drawable.animation);
+		hawk = (AnimationDrawable) hawkImage.getBackground();
+	}
+	
+	public void destroyHawk() {
+		hawkImage.setBackgroundResource(0);
+		hawk = null;
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		destroyHawk();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		destroyHawk();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		loadHawk();
 	}
 	
 	public void changeTo(int id) {
