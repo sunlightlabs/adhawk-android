@@ -61,13 +61,13 @@ public class AdHawk extends Activity {
 	public void setupControls() {
 		ActionBarUtils.setTitle(this, R.string.app_name, null);
 		
-		ActionBarUtils.setActionButton(this, R.id.action_2, R.drawable.preferences, new View.OnClickListener() {
+		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.preferences, new View.OnClickListener() {
 			public void onClick(View v) { 
 				startActivity(new Intent(AdHawk.this, Settings.class)); 
 			}
 		});
 		
-		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.about, new View.OnClickListener() {
+		ActionBarUtils.setActionButton(this, R.id.action_2, R.drawable.about, new View.OnClickListener() {
 			public void onClick(View v) { 
 				startActivity(new Intent(AdHawk.this, TitledWebView.class)
 					.putExtra("type", TitledWebView.SITE_ABOUT)
