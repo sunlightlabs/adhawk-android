@@ -34,7 +34,7 @@ public class AdHawk extends Activity {
 	public static final String TAG = "AdHawk";
 	
 	// in milliseconds, how long to record for
-	public static final int RECORD_TIME = 15000; // 2000; // 15000
+	public static final int RECORD_TIME = 15000; // 2000
 	
 	// load in echo nest library
 	static {
@@ -111,7 +111,6 @@ public class AdHawk extends Activity {
 		loadHawk();
 		
 		result = (TextView) findViewById(R.id.results_message);
-//		progress = (TextView) findViewById(R.id.progress_text);
 		
 		changeTo(R.id.listen);
 	}
