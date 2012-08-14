@@ -47,7 +47,7 @@ public class TitledWebView extends Activity {
 		ActionBarUtils.setTitle(this, title);
 		
 		if (type != SITE_ABOUT) {
-			ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.about, new View.OnClickListener() {
+			ActionBarUtils.setActionButton(this, R.id.action_2, R.drawable.about, new View.OnClickListener() {
 				public void onClick(View v) {
 					Intent intent = new Intent(TitledWebView.this, TitledWebView.class)
 						.putExtra("type", SITE_ABOUT);
@@ -55,6 +55,12 @@ public class TitledWebView extends Activity {
 				}
 			});
 		}
+		
+		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.preferences, new View.OnClickListener() {
+			public void onClick(View v) { 
+				startActivity(new Intent(TitledWebView.this, Settings.class)); 
+			}
+		});
 		
 		Utils.loadUrl(Utils.webViewFor(this), url);
 	}
