@@ -8,6 +8,15 @@
         <item name="android:textColorPrimary">@color/text</item>
         <item name="android:textColorSecondary">@color/text</item>
         <item name="android:textColorTertiary">@color/text</item>
+        <item name="android:listViewStyle">@style/MainList</item>
+    </style>
+    
+    <!--  used here because on Gingerbread, the default list theme 
+    	will choke on the main color background or window background being a static drawable -->
+    <style name="MainList" parent="RootList">
+        <item name="android:dividerHeight">1dp</item>
+	    <item name="android:divider">@color/background_title</item>
+	    <item name="android:cacheColorHint">#00000000</item>
     </style>
     
 </resources>
