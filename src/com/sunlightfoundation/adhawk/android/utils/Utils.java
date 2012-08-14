@@ -6,6 +6,7 @@ import java.util.Map;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -13,6 +14,7 @@ import android.webkit.WebViewClient;
 import com.sunlightfoundation.adhawk.android.AdDetails;
 import com.sunlightfoundation.adhawk.android.AdHawkServer;
 import com.sunlightfoundation.adhawk.android.R;
+import com.sunlightfoundation.adhawk.android.TitledWebView;
 
 
 public class Utils {
@@ -35,6 +37,8 @@ public class Utils {
 		WebSettings settings = results.getSettings();
 		settings.setJavaScriptEnabled(true);
 		
+		final String aboutUrl = activity.getResources().getString(R.string.site_about);
+		
 		results.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -43,9 +47,13 @@ public class Utils {
 					intent.putExtra("url", url);
 					activity.startActivity(intent);
 					return true;
+				} else if (url.equals(aboutUrl)) {
+					activity.startActivity(new Intent(activity, TitledWebView.class)
+						.putExtra("type", TitledWebView.SITE_ABOUT)
+					);
+					return true;
 				} else {
-					// override even regular URLs, to force the X-Client-App header to get set each time
-					Utils.loadUrl(view, url);
+					activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
 					return true;
 				}
 			}
