@@ -43,8 +43,11 @@ public class Utils {
 					intent.putExtra("url", url);
 					activity.startActivity(intent);
 					return true;
-				} else
-					return false;
+				} else {
+					// override even regular URLs, to force the X-Client-App header to get set each time
+					Utils.loadUrl(view, url);
+					return true;
+				}
 			}
 		});
 		
