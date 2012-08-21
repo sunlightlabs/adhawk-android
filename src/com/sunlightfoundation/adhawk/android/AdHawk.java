@@ -150,6 +150,7 @@ public class AdHawk extends Activity {
 		findViewById(R.id.progress).setVisibility(View.GONE);
 		findViewById(R.id.no_results).setVisibility(View.GONE);
 		
+		// hawk can be null if the identification process completes while user is on another screen
 		if (hawk != null)
 			hawk.stop();
 		
