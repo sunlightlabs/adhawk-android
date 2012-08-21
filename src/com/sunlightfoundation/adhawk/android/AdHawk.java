@@ -43,6 +43,7 @@ public class AdHawk extends Activity {
 	
 	private native String getCodeGen(String fname);
 	
+	private int currentState;
 	 
 	private TagAdTask task;
 	private TextView result;
@@ -141,6 +142,7 @@ public class AdHawk extends Activity {
 	protected void onResume() {
 		super.onResume();
 		loadHawk();
+		changeTo(currentState); // resume
 	}
 	
 	public void changeTo(int id) {
@@ -148,10 +150,15 @@ public class AdHawk extends Activity {
 		findViewById(R.id.progress).setVisibility(View.GONE);
 		findViewById(R.id.no_results).setVisibility(View.GONE);
 		
-		hawk.stop();
+		if (hawk != null)
+			hawk.stop();
+		
 		findViewById(id).setVisibility(View.VISIBLE);
-		if (id == R.id.progress)
+		
+		if (hawk != null && id == R.id.progress)
 			hawk.start();
+		
+		currentState = id;
 	}
 	
 	public void tagAd() {
