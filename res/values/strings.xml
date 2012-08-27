@@ -32,4 +32,7 @@
     
     <string name="widget_description">Ad Hawk Now!</string>
     <string name="widget_label">Listen Now</string>
+    
+    <string name="contact_email">adhawk@sunlightfoundation.com</string>
+    <string name="contact_subject">Ad Hawk feedback</string>
 </resources>

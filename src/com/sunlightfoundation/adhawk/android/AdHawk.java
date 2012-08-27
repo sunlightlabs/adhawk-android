@@ -18,11 +18,14 @@ import android.location.Location;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,7 +33,7 @@ import android.widget.TextView;
 import com.sunlightfoundation.adhawk.android.utils.ActionBarUtils;
 import com.sunlightfoundation.adhawk.android.utils.LocationUtils;
 
-public class AdHawk extends Activity {
+public class AdHawk extends Activity implements ActionBarUtils.HasActionMenu {
 	public static final String TAG = "AdHawk";
 	
 	// in milliseconds, how long to record for
@@ -69,9 +72,9 @@ public class AdHawk extends Activity {
 	public void setupControls() {
 		ActionBarUtils.setTitle(this, R.string.app_name, null);
 		
-		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.preferences, new View.OnClickListener() {
+		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.feedback, new View.OnClickListener() {
 			public void onClick(View v) { 
-				startActivity(new Intent(AdHawk.this, Settings.class)); 
+				doFeedback();
 			}
 		});
 		
@@ -82,6 +85,9 @@ public class AdHawk extends Activity {
 				);
 			}
 		});
+		
+		ActionBarUtils.setActionMenu(this, R.menu.main);
+		
 		
 		findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
@@ -130,6 +136,12 @@ public class AdHawk extends Activity {
 		hawk = null;
 	}
 	
+	public void doFeedback() {
+		Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", getResources().getString(R.string.contact_email), null));
+		intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.contact_subject));
+		startActivity(intent);
+	}
+	
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -147,6 +159,28 @@ public class AdHawk extends Activity {
 		super.onResume();
 		loadHawk();
 		changeTo(currentState); // resume
+	}
+	
+	@Override 
+	public boolean onCreateOptionsMenu(Menu menu) { 
+		super.onCreateOptionsMenu(menu); 
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		menuSelected(item);
+		return true;
+	}
+	
+	@Override
+	public void menuSelected(MenuItem item) {
+		switch(item.getItemId()) { 
+		case R.id.settings:
+			startActivity(new Intent(this, Settings.class));
+			break;
+		}
 	}
 	
 	public void changeTo(int id) {
