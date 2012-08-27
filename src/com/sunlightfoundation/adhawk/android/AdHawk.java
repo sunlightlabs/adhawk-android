@@ -58,6 +58,12 @@ public class AdHawk extends Activity {
 		setContentView(R.layout.main);
 		
 		setupControls();
+		
+		boolean autostart = getIntent().getBooleanExtra("autostart", false);
+		if (autostart)
+			tagAd();
+		else
+			changeTo(R.id.listen);
 	}
 	
 	public void setupControls() {
@@ -112,8 +118,6 @@ public class AdHawk extends Activity {
 		loadHawk();
 		
 		result = (TextView) findViewById(R.id.results_message);
-		
-		changeTo(R.id.listen);
 	}
 	
 	public void loadHawk() {

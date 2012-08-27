@@ -29,4 +29,7 @@
     <string name="progress_location">Attaching your location…</string>
     <string name="match_error">There was an error while identifying.</string>
     <string name="match_empty">Sorry, Ad Hawk missed that.</string>
+    
+    <string name="widget_description">Ad Hawk Now!</string>
+    <string name="widget_label">Listen Now</string>
 </resources>
