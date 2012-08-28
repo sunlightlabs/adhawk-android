@@ -112,6 +112,8 @@ public class AdDetails extends Activity implements ActionBarUtils.HasActionMenu 
 		case R.id.settings:
 			startActivity(new Intent(this, Settings.class));
 			break;
+		case R.id.review:
+			Utils.goReview(this);
 		}
 	}
 	

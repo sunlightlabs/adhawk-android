@@ -18,7 +18,6 @@ import android.location.Location;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,6 +31,7 @@ import android.widget.TextView;
 
 import com.sunlightfoundation.adhawk.android.utils.ActionBarUtils;
 import com.sunlightfoundation.adhawk.android.utils.LocationUtils;
+import com.sunlightfoundation.adhawk.android.utils.Utils;
 
 public class AdHawk extends Activity implements ActionBarUtils.HasActionMenu {
 	public static final String TAG = "AdHawk";
@@ -74,7 +74,7 @@ public class AdHawk extends Activity implements ActionBarUtils.HasActionMenu {
 		
 		ActionBarUtils.setActionButton(this, R.id.action_1, R.drawable.feedback, new View.OnClickListener() {
 			public void onClick(View v) { 
-				doFeedback();
+				Utils.doFeedback(AdHawk.this);
 			}
 		});
 		
@@ -136,12 +136,6 @@ public class AdHawk extends Activity implements ActionBarUtils.HasActionMenu {
 		hawk = null;
 	}
 	
-	public void doFeedback() {
-		Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", getResources().getString(R.string.contact_email), null));
-		intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.contact_subject));
-		startActivity(intent);
-	}
-	
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -180,6 +174,8 @@ public class AdHawk extends Activity implements ActionBarUtils.HasActionMenu {
 		case R.id.settings:
 			startActivity(new Intent(this, Settings.class));
 			break;
+		case R.id.review:
+			Utils.goReview(this);
 		}
 	}
 	
