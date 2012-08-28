@@ -1,0 +1,19 @@
+All files in /assets are Copyright (c) 2012, Sunlight Foundation, and are not licensed for reuse.
+
+All .png files in /res made specifically for this application (this excludes the generic icons borrowed from the Android platform), are Copyright (c) 2012, Sunlight Foundation, and are not licensed for reuse.
+
+
+=============
+
+
+The General Public License v3 covers all code in packages matched by:
+
+  com.sunlightfoundation.adhawk.android.* 
+
+This is equivalent to all code found in the directory:
+
+  /src/com/sunlightfoundation/adhawk/android
+
+The General Public License v3 can be found here:
+
+  http://www.gnu.org/licenses/gpl-3.0.txt
