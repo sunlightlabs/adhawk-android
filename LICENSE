@@ -1,9 +1,4 @@
-All files in /assets are Copyright (c) 2012, Sunlight Foundation, and are not licensed for reuse.
-
-All .png files in /res made specifically for this application (this excludes the generic icons borrowed from the Android platform), are Copyright (c) 2012, Sunlight Foundation, and are not licensed for reuse.
-
-
-=============
+All .png files in /res made specifically for this application (this excludes generic icons borrowed from the Android platform), are Copyright (c) 2012, Sunlight Foundation, and are not licensed for reuse.
 
 
 The General Public License v3 covers all code in packages matched by:
