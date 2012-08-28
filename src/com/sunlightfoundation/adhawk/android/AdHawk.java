@@ -207,6 +207,9 @@ public class AdHawk extends Activity implements ActionBarUtils.HasActionMenu {
 		if (response.resultUrl != null && response.resultUrl != "null") {
 			Log.d(TAG, "Response URL: " + response.resultUrl);
 			
+			// make it so that if we resume and come back from this, it defaults to the original listen posture
+			currentState = R.id.listen;
+			
 			Intent intent = new Intent(this, AdDetails.class);
 			intent.putExtra("details", response);
 			startActivity(intent);
