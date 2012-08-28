@@ -18,7 +18,7 @@
     	android:layout_height="48dp"
     	android:orientation="vertical"
     	
-    	android:background="@drawable/icon"
+    	android:background="@drawable/icon_widget"
     	/>
     
     <TextView
